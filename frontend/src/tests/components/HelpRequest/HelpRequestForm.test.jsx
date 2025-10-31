@@ -118,13 +118,14 @@ describe("HelpRequestForm tests", () => {
     const tableOrBreakoutRoomInput = screen.getByTestId(
       `${testId}-tableOrBreakoutRoom`,
     );
+
     fireEvent.change(tableOrBreakoutRoomInput, {
       target: { value: "a".repeat(31) },
     });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(screen.getByText(/Max length 30 characters/)).toBeInTheDocument();
+      expect(screen.getAllByText(/Max length 30 characters/).length).toBe(2);
     });
   });
 });
