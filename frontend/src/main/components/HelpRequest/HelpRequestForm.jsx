@@ -126,10 +126,6 @@ function HelpRequestForm({
           isInvalid={Boolean(errors.explanation)}
           {...register("explanation", {
             required: "explanation is required.",
-            maxLength: {
-              value: 30,
-              message: "Max length 30 characters",
-            },
           })}
         />
         <Form.Control.Feedback type="invalid">
