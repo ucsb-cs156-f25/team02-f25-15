@@ -54,7 +54,7 @@
                 {
                   "column": {
                     "name": "DATE_REQUESTED",
-                    "type": "VARCHAR(255)"
+                    "type": "TIMESTAMP"
                   }
                 },
                 {
