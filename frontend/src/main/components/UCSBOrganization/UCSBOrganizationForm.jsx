@@ -117,15 +117,20 @@ function UCSBOrganizationForm({
 
         <Row>
             <Col>
-            <Button type="submit" data-testid="UCSBOrganizationForm-submit">
-                {buttonLabel}
-            </Button>{" "}
             <Button
-                variant="secondary"
-                onClick={() => navigate(-1)}
-                data-testid="UCSBOrganizationForm-cancel"
+            data-testid="UCSBOrganizationForm-submit"
+            type="submit"
+            className="me-2"
             >
-                Cancel
+            {buttonLabel}
+            </Button>
+            <Button
+            data-testid="UCSBOrganizationForm-cancel"
+            variant="secondary"
+            type="button"
+            onClick={() => navigate(-1)}
+            >
+            Cancel
             </Button>
             </Col>
         </Row>
