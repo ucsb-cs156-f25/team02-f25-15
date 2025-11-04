@@ -9,7 +9,6 @@ import { useNavigate } from "react-router";
 import { hasRole } from "main/utils/useCurrentUser";
 import RecommendationRequestForm from "main/components/RecommendationRequest/RecommendationRequestForm";
 
-
 export default function RecommendationRequestTable({
   recommendationRequests,
   currentUser,
@@ -24,7 +23,7 @@ export default function RecommendationRequestTable({
   const deleteMutation = useBackendMutation(
     cellToAxiosParamsDelete,
     { onSuccess: onDeleteSuccess },
-    ["/api/recommendationrequests/all"]
+    ["/api/recommendationrequests/all"],
   );
   // Stryker restore all
 
@@ -66,10 +65,20 @@ export default function RecommendationRequestTable({
 
   if (hasRole(currentUser, "ROLE_ADMIN")) {
     columns.push(
-      ButtonColumn("Edit", "primary", editCallback, "RecommendationRequestTable")
+      ButtonColumn(
+        "Edit",
+        "primary",
+        editCallback,
+        "RecommendationRequestTable",
+      ),
     );
     columns.push(
-      ButtonColumn("Delete", "danger", deleteCallback, "RecommendationRequestTable")
+      ButtonColumn(
+        "Delete",
+        "danger",
+        deleteCallback,
+        "RecommendationRequestTable",
+      ),
     );
   }
 

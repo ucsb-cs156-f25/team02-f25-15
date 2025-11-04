@@ -1,13 +1,12 @@
 const articlesFixtures = {
-  oneArticle: 
-    {
-      id: 1,
-      title: "guyfalloffcliff",
-      url: "www.news.com/guyfalloffcliff",
-      email: "joesmith@email.com",
-      explanation: "guy falls off cliff",
-      localDateTime: "2022-01-02T12:00:00",
-    },
+  oneArticle: {
+    id: 1,
+    title: "guyfalloffcliff",
+    url: "www.news.com/guyfalloffcliff",
+    email: "joesmith@email.com",
+    explanation: "guy falls off cliff",
+    localDateTime: "2022-01-02T12:00:00",
+  },
   threeArticles: [
     {
       id: 1,

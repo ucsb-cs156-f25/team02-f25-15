@@ -2,7 +2,11 @@ import { Button, Form, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
-function RecommendationRequestForm({ initialContents, submitAction, buttonLabel = "Create" }) {
+function RecommendationRequestForm({
+  initialContents,
+  submitAction,
+  buttonLabel = "Create",
+}) {
   const {
     register,
     formState: { errors },
@@ -114,7 +118,9 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
       <Row>
         <Col>
           <Form.Group className="mb-3">
-            <Form.Label htmlFor="dateRequested">Date Requested (iso format)</Form.Label>
+            <Form.Label htmlFor="dateRequested">
+              Date Requested (iso format)
+            </Form.Label>
             <Form.Control
               data-testid="RecommendationRequestForm-dateRequested"
               id="dateRequested"
@@ -136,7 +142,9 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
 
         <Col>
           <Form.Group className="mb-3">
-            <Form.Label htmlFor="dateNeeded">Date Needed (iso format)</Form.Label>
+            <Form.Label htmlFor="dateNeeded">
+              Date Needed (iso format)
+            </Form.Label>
             <Form.Control
               data-testid="RecommendationRequestForm-dateNeeded"
               id="dateNeeded"

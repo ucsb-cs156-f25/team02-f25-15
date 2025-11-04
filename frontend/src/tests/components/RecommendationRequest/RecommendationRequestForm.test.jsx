@@ -33,7 +33,7 @@ describe("RecommendationRequestForm tests", () => {
         <Router>
           <RecommendationRequestForm />
         </Router>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expect(await screen.findByText(/Create/)).toBeInTheDocument();
@@ -51,7 +51,7 @@ describe("RecommendationRequestForm tests", () => {
             initialContents={recommendationRequestFixtures.oneRequest}
           />
         </Router>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expect(await screen.findByText(/Create/)).toBeInTheDocument();
@@ -70,7 +70,7 @@ describe("RecommendationRequestForm tests", () => {
         <Router>
           <RecommendationRequestForm />
         </Router>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expect(await screen.findByTestId(`${testId}-cancel`)).toBeInTheDocument();
@@ -86,7 +86,7 @@ describe("RecommendationRequestForm tests", () => {
         <Router>
           <RecommendationRequestForm />
         </Router>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expect(await screen.findByText(/Create/)).toBeInTheDocument();

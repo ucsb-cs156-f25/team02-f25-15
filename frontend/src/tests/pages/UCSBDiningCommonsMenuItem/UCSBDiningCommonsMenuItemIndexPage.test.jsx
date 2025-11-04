@@ -61,7 +61,9 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText(/Create UCSBDiningCommonsMenuItem/)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Create UCSBDiningCommonsMenuItem/),
+      ).toBeInTheDocument();
     });
     const button = screen.getByText(/Create UCSBDiningCommonsMenuItem/);
     expect(button).toHaveAttribute("href", "/UCSBDiningCommonsMenuItem/create");
@@ -94,7 +96,9 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
       "3",
     );
 
-    const createMenuItemButton = screen.queryByText("Create UCSBDiningCommonsMenuItem");
+    const createMenuItemButton = screen.queryByText(
+      "Create UCSBDiningCommonsMenuItem",
+    );
     expect(createMenuItemButton).not.toBeInTheDocument();
 
     const name = screen.getByText("Mac-n-Cheese");
@@ -108,10 +112,14 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
 
     // for non-admin users, details button is visible, but the edit and delete buttons should not be visible
     expect(
-      screen.queryByTestId("UCSBDiningCommonsMenuItemTable-cell-row-0-col-Delete-button"),
+      screen.queryByTestId(
+        "UCSBDiningCommonsMenuItemTable-cell-row-0-col-Delete-button",
+      ),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByTestId("UCSBDiningCommonsMenuItemTable-cell-row-0-col-Edit-button"),
+      screen.queryByTestId(
+        "UCSBDiningCommonsMenuItemTable-cell-row-0-col-Edit-button",
+      ),
     ).not.toBeInTheDocument();
   });
 
@@ -177,13 +185,17 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
     fireEvent.click(deleteButton);
 
     await waitFor(() => {
-      expect(mockToast).toBeCalledWith("UCSBDiningCommonsMenuItem with id 1 was deleted");
+      expect(mockToast).toBeCalledWith(
+        "UCSBDiningCommonsMenuItem with id 1 was deleted",
+      );
     });
 
     await waitFor(() => {
       expect(axiosMock.history.delete.length).toBe(1);
     });
-    expect(axiosMock.history.delete[0].url).toBe("/api/UCSBDiningCommonsMenuItem");
+    expect(axiosMock.history.delete[0].url).toBe(
+      "/api/UCSBDiningCommonsMenuItem",
+    );
     expect(axiosMock.history.delete[0].params).toEqual({ id: 1 });
   });
 });

@@ -50,7 +50,7 @@ describe("RecommendationRequestTable tests", () => {
             currentUser={currentUserFixtures.adminUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expectedHeaders.forEach((headerText) => {
@@ -59,7 +59,9 @@ describe("RecommendationRequestTable tests", () => {
     });
 
     expectedFields.forEach((field) => {
-      const fieldElement = screen.queryByTestId(`${testId}-cell-row-0-col-${field}`);
+      const fieldElement = screen.queryByTestId(
+        `${testId}-cell-row-0-col-${field}`,
+      );
       expect(fieldElement).not.toBeInTheDocument();
     });
   });
@@ -73,7 +75,7 @@ describe("RecommendationRequestTable tests", () => {
             currentUser={currentUserFixtures.adminUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expectedHeaders.forEach((headerText) => {
@@ -86,16 +88,22 @@ describe("RecommendationRequestTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`)).toHaveTextContent(
-      "student1@ucsb.edu"
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "1",
     );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
+    ).toHaveTextContent("student1@ucsb.edu");
 
-    const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
+    const editButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Edit-button`,
+    );
     expect(editButton).toBeInTheDocument();
     expect(editButton).toHaveClass("btn-primary");
 
-    const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    const deleteButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Delete-button`,
+    );
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
   });
@@ -109,7 +117,7 @@ describe("RecommendationRequestTable tests", () => {
             currentUser={currentUserFixtures.userOnly}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expectedHeaders.forEach((headerText) => {
@@ -122,10 +130,12 @@ describe("RecommendationRequestTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`)).toHaveTextContent(
-      "student1@ucsb.edu"
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "1",
     );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
+    ).toHaveTextContent("student1@ucsb.edu");
 
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
@@ -140,16 +150,20 @@ describe("RecommendationRequestTable tests", () => {
             currentUser={currentUserFixtures.adminUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
-    const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
+    const editButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Edit-button`,
+    );
     expect(editButton).toBeInTheDocument();
 
     fireEvent.click(editButton);
 
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith("/recommendationrequests/edit/1")
+      expect(mockedNavigate).toHaveBeenCalledWith(
+        "/recommendationrequests/edit/1",
+      ),
     );
   });
 
@@ -162,10 +176,12 @@ describe("RecommendationRequestTable tests", () => {
             currentUser={currentUserFixtures.adminUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
-    const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    const deleteButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Delete-button`,
+    );
     expect(deleteButton).toBeInTheDocument();
 
     fireEvent.click(deleteButton);
