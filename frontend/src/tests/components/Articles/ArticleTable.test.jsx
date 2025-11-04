@@ -30,7 +30,7 @@ describe("ArticleTable tests", () => {
         <MemoryRouter>
           <ArticleTable articles={[]} currentUser={currentUser} />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expectedHeaders.forEach((headerText) => {
@@ -39,7 +39,7 @@ describe("ArticleTable tests", () => {
 
     expectedFields.forEach((field) => {
       expect(
-        screen.queryByTestId(`${testId}-cell-row-0-col-${field}`)
+        screen.queryByTestId(`${testId}-cell-row-0-col-${field}`),
       ).not.toBeInTheDocument();
     });
   });
@@ -55,7 +55,7 @@ describe("ArticleTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expectedHeaders.forEach((headerText) => {
@@ -63,64 +63,64 @@ describe("ArticleTable tests", () => {
     });
 
     // --- Row 0 checks ---
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "1",
+    );
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-id`)
-    ).toHaveTextContent("1");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-title`)
+      screen.getByTestId(`${testId}-cell-row-0-col-title`),
     ).toHaveTextContent("guyfallsoffcliff");
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-url`)
+      screen.getByTestId(`${testId}-cell-row-0-col-url`),
     ).toHaveTextContent("www.news.com/guyfallsoffcliff");
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-email`)
+      screen.getByTestId(`${testId}-cell-row-0-col-email`),
     ).toHaveTextContent("joesmith@email.com");
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-explanation`)
+      screen.getByTestId(`${testId}-cell-row-0-col-explanation`),
     ).toHaveTextContent("guy falls off cliff");
 
     // --- Row 1 checks ---
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      "2",
+    );
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-id`)
-    ).toHaveTextContent("2");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-title`)
+      screen.getByTestId(`${testId}-cell-row-1-col-title`),
     ).toHaveTextContent("guygetsinjured");
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-url`)
+      screen.getByTestId(`${testId}-cell-row-1-col-url`),
     ).toHaveTextContent("www.news.com/guygetsinjured");
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-email`)
+      screen.getByTestId(`${testId}-cell-row-1-col-email`),
     ).toHaveTextContent("joesmith@email.com");
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-explanation`)
+      screen.getByTestId(`${testId}-cell-row-1-col-explanation`),
     ).toHaveTextContent("guy gets injured");
 
     // --- Row 2 checks ---
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent(
+      "3",
+    );
     expect(
-      screen.getByTestId(`${testId}-cell-row-2-col-id`)
-    ).toHaveTextContent("3");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-2-col-title`)
+      screen.getByTestId(`${testId}-cell-row-2-col-title`),
     ).toHaveTextContent("guyrecovers");
     expect(
-      screen.getByTestId(`${testId}-cell-row-2-col-url`)
+      screen.getByTestId(`${testId}-cell-row-2-col-url`),
     ).toHaveTextContent("www.news.com/guyrecovers");
     expect(
-      screen.getByTestId(`${testId}-cell-row-2-col-email`)
+      screen.getByTestId(`${testId}-cell-row-2-col-email`),
     ).toHaveTextContent("joesmith@email.com");
     expect(
-      screen.getByTestId(`${testId}-cell-row-2-col-explanation`)
+      screen.getByTestId(`${testId}-cell-row-2-col-explanation`),
     ).toHaveTextContent("guy recovers");
 
     const editButton = screen.getByTestId(
-      `${testId}-cell-row-0-col-Edit-button`
+      `${testId}-cell-row-0-col-Edit-button`,
     );
     expect(editButton).toBeInTheDocument();
     expect(editButton).toHaveClass("btn-primary");
 
     const deleteButton = screen.getByTestId(
-      `${testId}-cell-row-0-col-Delete-button`
+      `${testId}-cell-row-0-col-Delete-button`,
     );
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
@@ -137,7 +137,7 @@ describe("ArticleTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expectedHeaders.forEach((headerText) => {
@@ -145,17 +145,17 @@ describe("ArticleTable tests", () => {
     });
 
     // Spot-check first two rows
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "1",
+    );
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-id`)
-    ).toHaveTextContent("1");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-title`)
+      screen.getByTestId(`${testId}-cell-row-0-col-title`),
     ).toHaveTextContent("guyfallsoffcliff");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      "2",
+    );
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-id`)
-    ).toHaveTextContent("2");
-    expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-title`)
+      screen.getByTestId(`${testId}-cell-row-1-col-title`),
     ).toHaveTextContent("guygetsinjured");
 
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
@@ -173,20 +173,20 @@ describe("ArticleTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expect(
-      await screen.findByTestId(`${testId}-cell-row-0-col-id`)
+      await screen.findByTestId(`${testId}-cell-row-0-col-id`),
     ).toHaveTextContent("1");
 
     const editButton = screen.getByTestId(
-      `${testId}-cell-row-0-col-Edit-button`
+      `${testId}-cell-row-0-col-Edit-button`,
     );
     fireEvent.click(editButton);
 
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith("/articles/edit/1")
+      expect(mockedNavigate).toHaveBeenCalledWith("/articles/edit/1"),
     );
   });
 
@@ -206,15 +206,15 @@ describe("ArticleTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expect(
-      await screen.findByTestId(`${testId}-cell-row-0-col-id`)
+      await screen.findByTestId(`${testId}-cell-row-0-col-id`),
     ).toHaveTextContent("1");
 
     const deleteButton = screen.getByTestId(
-      `${testId}-cell-row-0-col-Delete-button`
+      `${testId}-cell-row-0-col-Delete-button`,
     );
     expect(deleteButton).toBeInTheDocument();
 
@@ -229,7 +229,10 @@ describe("ArticleTable tests", () => {
 // Additional tests for articleUtils (keeps mutation 100%)
 // ----------------------------------------------------
 import { toast } from "react-toastify";
-import { onDeleteSuccess, cellToAxiosParamsDelete } from "main/utils/articleUtils";
+import {
+  onDeleteSuccess,
+  cellToAxiosParamsDelete,
+} from "main/utils/articleUtils";
 
 // Mock toast so no actual popup appears
 vi.mock("react-toastify", () => ({
