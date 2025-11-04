@@ -9,16 +9,18 @@ function MenuItemReviewForm({
 }) {
   // Stryker disable all
 
-  const normalizedContents = initialContents ? {
-    ...initialContents,
-    dateReviewed: initialContents.dateReviewed?.slice(0, 16)
-  } : {};
+  const normalizedContents = initialContents
+    ? {
+        ...initialContents,
+        dateReviewed: initialContents.dateReviewed?.slice(0, 16),
+      }
+    : {};
 
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({ defaultValues: normalizedContents || {} });
+  } = useForm({ defaultValues: normalizedContents });
   // Stryker restore all
 
   // Stryker disable Regex
@@ -33,7 +35,7 @@ function MenuItemReviewForm({
   const onSubmit = (data) => {
     const submissionData = {
       ...data,
-      dateReviewed: data.dateReviewed + ":00"
+      dateReviewed: data.dateReviewed + ":00",
     };
     submitAction(submissionData);
   };

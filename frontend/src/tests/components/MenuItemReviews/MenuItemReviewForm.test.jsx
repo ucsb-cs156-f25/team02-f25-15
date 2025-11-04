@@ -18,7 +18,13 @@ vi.mock("react-router", async () => {
 describe("MenuItemReviewForm tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["Item ID", "Reviewer Email", "Stars", "Date Reviewed (iso format)", "Comments"];
+  const expectedHeaders = [
+    "Item ID",
+    "Reviewer Email",
+    "Stars",
+    "Date Reviewed (iso format)",
+    "Comments",
+  ];
   const testId = "MenuItemReviewForm";
 
   test("renders correctly with no initialContents", async () => {
@@ -27,7 +33,7 @@ describe("MenuItemReviewForm tests", () => {
         <Router>
           <MenuItemReviewForm />
         </Router>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     expect(await screen.findByText(/Create/)).toBeInTheDocument();
@@ -42,9 +48,11 @@ describe("MenuItemReviewForm tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
-          <MenuItemReviewForm initialContents={menuItemReviewFixtures.oneMenuItemReview} />
+          <MenuItemReviewForm
+            initialContents={menuItemReviewFixtures.oneMenuItemReview}
+          />
         </Router>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     expect(await screen.findByText(/Create/)).toBeInTheDocument();
@@ -64,7 +72,7 @@ describe("MenuItemReviewForm tests", () => {
         <Router>
           <MenuItemReviewForm />
         </Router>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
     expect(await screen.findByTestId(`${testId}-cancel`)).toBeInTheDocument();
     const cancelButton = screen.getByTestId(`${testId}-cancel`);
@@ -80,7 +88,7 @@ describe("MenuItemReviewForm tests", () => {
         <Router>
           <MenuItemReviewForm />
         </Router>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     expect(await screen.findByText(/Create/)).toBeInTheDocument();
@@ -90,11 +98,15 @@ describe("MenuItemReviewForm tests", () => {
     await screen.findByText(/Item ID is required/);
     expect(screen.getByText(/Reviewer Email is required/)).toBeInTheDocument();
     expect(screen.getByText(/Stars are required/)).toBeInTheDocument();
-    expect(screen.getByText(/Date reviewed \(iso format\) is required/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Date reviewed \(iso format\) is required/)
+    ).toBeInTheDocument();
     expect(screen.getByText(/Comment is required/)).toBeInTheDocument();
 
     const reviewerEmailInput = screen.getByTestId(`${testId}-reviewerEmail`);
-    fireEvent.change(reviewerEmailInput, { target: { value: "a".repeat(256) } });
+    fireEvent.change(reviewerEmailInput, {
+      target: { value: "a".repeat(256) },
+    });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
@@ -107,6 +119,52 @@ describe("MenuItemReviewForm tests", () => {
 
     await waitFor(() => {
       expect(screen.getByText(/Max length 255 characters/)).toBeInTheDocument();
+    });
+  });
+
+  // extra test for ss coverage
+  test("calls submitAction with properly formatted data on submit", async () => {
+    const mockSubmitAction = vi.fn();
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <MenuItemReviewForm
+            submitAction={mockSubmitAction}
+            buttonLabel="Update"
+          />
+        </Router>
+      </QueryClientProvider>
+    );
+
+    const itemIdInput = screen.getByTestId(`${testId}-itemId`);
+    const reviewerEmailInput = screen.getByTestId(`${testId}-reviewerEmail`);
+    const starsInput = screen.getByTestId(`${testId}-stars`);
+    const dateReviewedInput = screen.getByTestId(`${testId}-dateReviewed`);
+    const commentsInput = screen.getByTestId(`${testId}-comments`);
+    const submitButton = screen.getByTestId(`${testId}-submit`);
+
+    fireEvent.change(itemIdInput, { target: { value: "5" } });
+    fireEvent.change(reviewerEmailInput, {
+      target: { value: "test@test.com" },
+    });
+    fireEvent.change(starsInput, { target: { value: "4" } });
+    fireEvent.change(dateReviewedInput, {
+      target: { value: "2025-11-03T20:00" },
+    });
+    fireEvent.change(commentsInput, { target: { value: "Good food" } });
+
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(mockSubmitAction).toHaveBeenCalledTimes(1);
+      expect(mockSubmitAction).toHaveBeenCalledWith({
+        itemId: "5",
+        reviewerEmail: "test@test.com",
+        stars: "4",
+        dateReviewed: "2025-11-03T20:00:00",
+        comments: "Good food",
+      });
     });
   });
 });
