@@ -8,11 +8,17 @@ function MenuItemReviewForm({
   buttonLabel = "Create",
 }) {
   // Stryker disable all
+
+  const normalizedContents = initialContents ? {
+    ...initialContents,
+    dateReviewed: initialContents.dateReviewed?.slice(0, 16)
+  } : {};
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({ defaultValues: initialContents || {} });
+  } = useForm({ defaultValues: normalizedContents || {} });
   // Stryker restore all
 
   // Stryker disable Regex
@@ -24,8 +30,16 @@ function MenuItemReviewForm({
 
   const testIdPrefix = "MenuItemReviewForm";
 
+  const onSubmit = (data) => {
+    const submissionData = {
+      ...data,
+      dateReviewed: data.dateReviewed + ":00"
+    };
+    submitAction(submissionData);
+  };
+
   return (
-    <Form onSubmit={handleSubmit(submitAction)}>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       {initialContents && (
         <Form.Group className="mb-3">
           <Form.Label htmlFor="id">Id</Form.Label>
