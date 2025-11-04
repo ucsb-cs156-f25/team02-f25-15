@@ -29,7 +29,7 @@ export default function UCSBDiningCommonsMenuItemIndexPage() {
           href="/UCSBDiningCommonsMenuItem/create"
           style={{ float: "right" }}
         >
-          Create UCSBDiningCommonsMenuItem
+          Create Menu Item
         </Button>
       );
     }
@@ -39,7 +39,7 @@ export default function UCSBDiningCommonsMenuItemIndexPage() {
     <BasicLayout>
       <div className="pt-2">
         {createButton()}
-        <h1>UCSBDiningCommonsMenuItem</h1>
+        <h1>Menu Items</h1>
         <UCSBDiningCommonsMenuItemTable menuItems={menuItems} currentUser={currentUser} />
       </div>
     </BasicLayout>
