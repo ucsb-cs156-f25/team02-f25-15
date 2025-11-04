@@ -167,4 +167,46 @@ describe("MenuItemReviewForm tests", () => {
       });
     });
   });
+
+  test("enforces max length validation on comments field", async () => {
+    const mockSubmitAction = vi.fn();
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <MenuItemReviewForm submitAction={mockSubmitAction} />
+        </Router>
+      </QueryClientProvider>
+    );
+
+    const itemIdInput = screen.getByTestId(`${testId}-itemId`);
+    const reviewerEmailInput = screen.getByTestId(`${testId}-reviewerEmail`);
+    const starsInput = screen.getByTestId(`${testId}-stars`);
+    const dateReviewedInput = screen.getByTestId(`${testId}-dateReviewed`);
+    const commentsInput = screen.getByTestId(`${testId}-comments`);
+    const submitButton = screen.getByTestId(`${testId}-submit`);
+
+    // Fill all fields EXCEPT comments with valid data
+    fireEvent.change(itemIdInput, { target: { value: "5" } });
+    fireEvent.change(reviewerEmailInput, {
+      target: { value: "test@test.com" },
+    });
+    fireEvent.change(starsInput, { target: { value: "4" } });
+    fireEvent.change(dateReviewedInput, {
+      target: { value: "2025-11-03T20:00" },
+    });
+
+    // Make ONLY comments exceed max length (256 characters)
+    fireEvent.change(commentsInput, { target: { value: "a".repeat(256) } });
+
+    fireEvent.click(submitButton);
+
+    // Should show the SPECIFIC max length error message
+    await waitFor(() => {
+      expect(screen.getByText(/Max length 255 characters/)).toBeInTheDocument();
+    });
+
+    // Verify form was NOT submitted due to validation error
+    expect(mockSubmitAction).not.toHaveBeenCalled();
+  });
 });
