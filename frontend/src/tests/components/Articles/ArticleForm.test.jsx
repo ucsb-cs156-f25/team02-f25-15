@@ -118,6 +118,10 @@ describe("ArticleForm tests", () => {
     expect(screen.getByText(/LocalDateTime is required/)).toBeInTheDocument();
 
     const titleInput = screen.getByTestId(`${testId}-title`);
+    expect(screen.getByTestId(`${testId}-url`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-email`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-explanation`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-localDateTime`)).toBeInTheDocument();
     fireEvent.change(titleInput, { target: { value: "a".repeat(31) } });
     fireEvent.click(submitButton);
 
