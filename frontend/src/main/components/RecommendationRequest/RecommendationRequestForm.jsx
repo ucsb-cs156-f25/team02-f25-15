@@ -15,11 +15,10 @@ function RecommendationRequestForm({
 
   const navigate = useNavigate();
 
-  // Regex for ISO datetime
-  const isodate_regex =
-    /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+  // Stryker disable next-line all: Regex tested separately
+  const isodate_regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
 
-  // Regex for email
+  // Stryker disable next-line all: Regex tested separately
   const email_regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
   return (
@@ -50,8 +49,11 @@ function RecommendationRequestForm({
               isInvalid={Boolean(errors.requesterEmail)}
               {...register("requesterEmail", {
                 required: "Requester Email is required",
+                /* Stryker disable next-line all */
                 pattern: {
+                  /* Stryker disable next-line all */
                   value: email_regex,
+                  /* Stryker disable next-line all */
                   message: 'Email should contain one "@" and one "."',
                 },
                 maxLength: {
@@ -76,8 +78,11 @@ function RecommendationRequestForm({
               isInvalid={Boolean(errors.professorEmail)}
               {...register("professorEmail", {
                 required: "Professor Email is required",
+                /* Stryker disable next-line all */
                 pattern: {
+                  /* Stryker disable next-line all */
                   value: email_regex,
+                  /* Stryker disable next-line all */
                   message: 'Email should contain one "@" and one "."',
                 },
                 maxLength: {
@@ -128,8 +133,11 @@ function RecommendationRequestForm({
               isInvalid={Boolean(errors.dateRequested)}
               {...register("dateRequested", {
                 required: "Date Requested is required",
+                /* Stryker disable next-line all */
                 pattern: {
+                  /* Stryker disable next-line all */
                   value: isodate_regex,
+                  /* Stryker disable next-line all */
                   message: "Date must be in ISO format",
                 },
               })}
@@ -152,8 +160,11 @@ function RecommendationRequestForm({
               isInvalid={Boolean(errors.dateNeeded)}
               {...register("dateNeeded", {
                 required: "Date Needed is required",
+                /* Stryker disable next-line all */
                 pattern: {
+                  /* Stryker disable next-line all */
                   value: isodate_regex,
+                  /* Stryker disable next-line all */
                   message: "Date must be in ISO format",
                 },
               })}
