@@ -224,3 +224,53 @@ describe("ArticleTable tests", () => {
     expect(axiosMock.history.delete[0].params).toEqual({ id: 1 });
   });
 });
+
+// ----------------------------------------------------
+// Additional tests for articleUtils (keeps mutation 100%)
+// ----------------------------------------------------
+import { toast } from "react-toastify";
+import { onDeleteSuccess, cellToAxiosParamsDelete } from "main/utils/articleUtils";
+
+// Mock toast so no actual popup appears
+vi.mock("react-toastify", () => ({
+  toast: vi.fn(),
+}));
+
+describe("articleUtils tests (added to ArticleTable.test.jsx)", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  test("onDeleteSuccess logs and calls toast", () => {
+    const message = "Article deleted successfully";
+    const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+
+    onDeleteSuccess(message);
+
+    expect(consoleSpy).toHaveBeenCalledWith(message);
+    expect(toast).toHaveBeenCalledWith(message);
+
+    consoleSpy.mockRestore();
+  });
+
+  test("cellToAxiosParamsDelete returns proper axios config", () => {
+    const cell = {
+      row: {
+        original: { id: 42 },
+      },
+    };
+
+    const result = cellToAxiosParamsDelete(cell);
+
+    expect(result).toEqual({
+      url: "/api/articles",
+      method: "DELETE",
+      params: { id: 42 },
+    });
+
+    // Extra checks to guarantee mutation kills
+    expect(result.url).toBe("/api/articles");
+    expect(result.method).toBe("DELETE");
+    expect(result.params.id).toBe(42);
+  });
+});
