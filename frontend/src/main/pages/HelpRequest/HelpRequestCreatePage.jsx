@@ -10,7 +10,7 @@ export default function HelpRequestCreatePage({ storybook = false }) {
     method: "POST",
     params: {
       requesterEmail: helprequest.requesterEmail,
-      teamId: helprequest.requesterEmail,
+      teamId: helprequest.teamId,
       tableOrBreakoutRoom: helprequest.tableOrBreakoutRoom,
       requestTime: helprequest.requestTime,
       explanation: helprequest.explanation,
@@ -20,7 +20,7 @@ export default function HelpRequestCreatePage({ storybook = false }) {
 
   const onSuccess = (helprequest) => {
     toast(
-      `New restaurant Created - id: ${helprequest.id} requesterEmail: ${helprequest.requesterEmail}`,
+      `New Help Request Created - id: ${helprequest.id} requesterEmail: ${helprequest.requesterEmail}`,
     );
   };
 
@@ -28,7 +28,7 @@ export default function HelpRequestCreatePage({ storybook = false }) {
     objectToAxiosParams,
     { onSuccess },
     // Stryker disable next-line all : hard to set up test for caching
-    ["/api/helprequest/all"], // mutation makes this key stale so that pages relying on it reload
+    ["/api/helprequests/all"], // mutation makes this key stale so that pages relying on it reload
   );
 
   const { isSuccess } = mutation;
