@@ -16,6 +16,10 @@ function ArticleForm({
   // Stryker restore all
 
   const navigate = useNavigate();
+  // ✅ Defined before use
+  const isodate_regex =
+    /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+
 
   const testIdPrefix = "ArticleForm";
 
@@ -97,6 +101,22 @@ function ArticleForm({
         />
         <Form.Control.Feedback type="invalid">
           {errors.explanation?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="localDateTime">Date (iso format)</Form.Label>
+        <Form.Control
+          data-testid="UCSBDateForm-localDateTime"
+          id="localDateTime"
+          type="datetime-local"
+          isInvalid={Boolean(errors.localDateTime)}
+          {...register("localDateTime", {
+            required: true,
+            pattern: isodate_regex,
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.localDateTime && "LocalDateTime is required. "}
         </Form.Control.Feedback>
       </Form.Group>
 

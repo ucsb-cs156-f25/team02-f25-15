@@ -18,7 +18,7 @@ vi.mock("react-router", async () => {
 describe("ArticleForm tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["Title", "URL", "Email", "Explanation"];
+  const expectedHeaders = ["Title", "URL", "Email", "Explanation","LocalDateTime"];
   const testId = "ArticleForm";
 
   test("renders correctly with no initialContents", async () => {
@@ -71,6 +71,9 @@ describe("ArticleForm tests", () => {
     expect(screen.getByLabelText(`Explanation`)).toHaveValue(
       articlesFixtures.oneArticle.explanation,
     );
+    expect(screen.getByLabelText(`LocalDateTime`)).toHaveValue(
+      articlesFixtures.oneArticle.localDateTime,
+    );
   });
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
@@ -106,6 +109,7 @@ describe("ArticleForm tests", () => {
     expect(screen.getByText(/URL is required/)).toBeInTheDocument();
     expect(screen.getByText(/Email is required/)).toBeInTheDocument();
     expect(screen.getByText(/Explanation is required/)).toBeInTheDocument();
+    expect(screen.getByText(/LocalDateTime is required/)).toBeInTheDocument();
 
     const titleInput = screen.getByTestId(`${testId}-title`);
     fireEvent.change(titleInput, { target: { value: "a".repeat(31) } });

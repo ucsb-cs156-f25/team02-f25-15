@@ -56,6 +56,10 @@ export default function ArticleTable({
       header: "Explanation",
       accessorKey: "explanation",
     },
+    {
+      header: "LocalDateTime",
+      accessorKey: "localDateTime",
+    },
   ];
 
   if (hasRole(currentUser, "ROLE_ADMIN")) {
