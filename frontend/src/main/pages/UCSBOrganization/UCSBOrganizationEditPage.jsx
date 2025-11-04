@@ -7,10 +7,7 @@ import { toast } from "react-toastify";
 export default function UCSBOrganizationEditPage({ storybook = false }) {
   const { orgCode: orgCodeParam, id: legacyIdParam } = useParams();
   const orgCode = orgCodeParam ?? legacyIdParam;
-  if (!orgCode) {
-    toast("Missing route param: orgCode (or id). Check your route path.");
-    return <Navigate to="/ucsborganization" />;
-  }
+
   // GET the record by orgCode
   const { data: ucsbOrganization } = useBackend(
     [`/api/ucsborganizations?orgCode=${orgCode}`],
@@ -41,6 +38,10 @@ export default function UCSBOrganizationEditPage({ storybook = false }) {
   ]);
 
   const onSubmit = (data) => mutation.mutate(data);
+  if (!orgCode) {
+    toast("Missing route param: orgCode (or id). Check your route path.");
+    return <Navigate to="/ucsborganization" />;
+  }
 
   if (mutation.isSuccess && !storybook) {
     return <Navigate to="/ucsborganization" />;
