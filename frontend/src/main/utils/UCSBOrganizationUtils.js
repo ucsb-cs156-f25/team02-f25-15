@@ -6,9 +6,10 @@ export function onDeleteSuccess(message) {
 }
 
 export function cellToAxiosParamsDelete(cell) {
+  const orgCode = cell?.row?.original?.orgCode;
   return {
-    url: "/api/ucsborganization",
+    url: "/api/ucsborganizations",
     method: "DELETE",
-    params: { orgCode: cell.row.original.orgCode },
+    params: { orgCode },
   };
 }
