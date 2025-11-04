@@ -18,7 +18,13 @@ vi.mock("react-router", async () => {
 describe("ArticleForm tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["Title", "URL", "Email", "Explanation","LocalDateTime"];
+  const expectedHeaders = [
+    "Title",
+    "URL",
+    "Email",
+    "Explanation",
+    "Date (iso format)",
+  ];
   const testId = "ArticleForm";
 
   test("renders correctly with no initialContents", async () => {
@@ -71,7 +77,7 @@ describe("ArticleForm tests", () => {
     expect(screen.getByLabelText(`Explanation`)).toHaveValue(
       articlesFixtures.oneArticle.explanation,
     );
-    expect(screen.getByLabelText(`LocalDateTime`)).toHaveValue(
+    expect(screen.getByLabelText(`Date (iso format)`)).toHaveValue(
       articlesFixtures.oneArticle.localDateTime,
     );
   });

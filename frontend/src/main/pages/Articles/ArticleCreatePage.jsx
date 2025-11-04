@@ -4,7 +4,7 @@ import { Navigate } from "react-router";
 import { useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
 
-const addZ = (string) => `${string}Z`;
+//const addZ = (string) => `${string}Z`;
 
 export default function ArticleCreatePage({ storybook = false }) {
   const objectToAxiosParams = (article) => ({
@@ -15,14 +15,12 @@ export default function ArticleCreatePage({ storybook = false }) {
       url: article.url,
       email: article.email,
       explanation: article.explanation,
-      localDateTime: article.localDateTime + "Z"
+      localDateTime: article.localDateTime,
     },
   });
 
   const onSuccess = (article) => {
-    toast(
-      `New article Created - id: ${article.id} title: ${article.title}`,
-    );
+    toast(`New article Created - id: ${article.id} title: ${article.title}`);
   };
 
   const mutation = useBackendMutation(
