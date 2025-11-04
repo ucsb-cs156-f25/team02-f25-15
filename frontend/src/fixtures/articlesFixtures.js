@@ -11,8 +11,8 @@ const articlesFixtures = {
   threeArticles: [
     {
       id: 1,
-      title: "guyfalloffcliff",
-      url: "www.news.com/guyfalloffcliff",
+      title: "guyfallsoffcliff",
+      url: "www.news.com/guyfallsoffcliff",
       email: "joesmith@email.com",
       explanation: "guy falls off cliff",
       localDateTime: "2022-01-02T12:00:00",
