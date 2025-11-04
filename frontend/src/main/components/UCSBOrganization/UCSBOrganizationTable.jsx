@@ -17,7 +17,7 @@ export default function UCSBOrganizationTable({ organizations, currentUser }) {
   const deleteMutation = useBackendMutation(
     cellToAxiosParamsDelete,
     { onSuccess: onDeleteSuccess },
-    ["/api/ucsborganization/all"],
+    ["/api/ucsborganizations/all"],
   );
 
   const deleteCallback = (cell) => deleteMutation.mutate(cell);
