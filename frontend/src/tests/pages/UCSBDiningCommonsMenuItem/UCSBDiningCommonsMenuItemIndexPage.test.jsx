@@ -61,9 +61,9 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText(/Create UCSBDiningCommonsMenuItem/)).toBeInTheDocument();
+      expect(screen.getByText(/Create Menu Item/)).toBeInTheDocument();
     });
-    const button = screen.getByText(/Create UCSBDiningCommonsMenuItem/);
+    const button = screen.getByText(/Create Menu Item/);
     expect(button).toHaveAttribute("href", "/UCSBDiningCommonsMenuItem/create");
     expect(button).toHaveAttribute("style", "float: right;");
   });
@@ -94,7 +94,7 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
       "3",
     );
 
-    const createMenuItemButton = screen.queryByText("Create UCSBDiningCommonsMenuItem");
+    const createMenuItemButton = screen.queryByText("Create Menu Item");
     expect(createMenuItemButton).not.toBeInTheDocument();
 
     const name = screen.getByText("Mac-n-Cheese");

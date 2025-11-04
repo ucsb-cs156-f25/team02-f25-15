@@ -67,7 +67,7 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
           </MemoryRouter>
         </QueryClientProvider>,
       );
-      await screen.findByText("Edit UCSBDiningCommonsMenuItem");
+      await screen.findByText("Edit Menu Item");
       expect(screen.queryByTestId("UCSBDiningCommonsMenuItemForm-dining_commons_code")).not.toBeInTheDocument();
       restoreConsole();
     });
