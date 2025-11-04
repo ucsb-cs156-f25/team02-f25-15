@@ -107,7 +107,7 @@ function MenuItemReviewForm({
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.dateReviewed && "Date reviewed is required. "}
+          {errors.dateReviewed && "Date reviewed (iso format) is required."}
         </Form.Control.Feedback>
       </Form.Group>
 
