@@ -214,8 +214,8 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
       fireEvent.change(diningCommonsCodeField, {
         target: { value: "portola" },
       });
-      fireEvent.change(nameField, { target: { value: "Veggie Burger" } });
-      fireEvent.change(stationField, { target: { value: "Grill Station" } });
+      fireEvent.change(nameField, { target: { value: "Turkey Sandwich" } });
+      fireEvent.change(stationField, { target: { value: "Deli" } });
 
       fireEvent.click(submitButton);
 
@@ -224,6 +224,16 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
         "UCSBDiningCommonsMenuItem Updated - id: 17 name: Turkey Sandwich",
       );
       expect(mockNavigate).toBeCalledWith({ to: "/UCSBDiningCommonsMenuItem" });
+
+      expect(axiosMock.history.put.length).toBe(1); // times called
+      expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
+      expect(axiosMock.history.put[0].data).toBe(
+        JSON.stringify({
+          dining_commons_code: "portola",
+          name: "Turkey Sandwich",
+          station: "Deli",
+        }),
+      ); // posted object
     });
   });
 });

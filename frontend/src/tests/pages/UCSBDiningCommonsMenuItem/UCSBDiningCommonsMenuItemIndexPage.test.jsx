@@ -46,12 +46,13 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
       .reply(200, systemInfoFixtures.showingNeither);
   };
 
-  const queryClient = new QueryClient();
-
   test("Renders with Create Button for admin user", async () => {
+    // arrange
     setupAdminUser();
+    const queryClient = new QueryClient();
     axiosMock.onGet("/api/UCSBDiningCommonsMenuItem/all").reply(200, []);
 
+    // act
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -60,22 +61,24 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
       </QueryClientProvider>,
     );
 
+    // assert
     await waitFor(() => {
-      expect(
-        screen.getByText(/Create UCSBDiningCommonsMenuItem/),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/Create Menu Item/)).toBeInTheDocument();
     });
-    const button = screen.getByText(/Create UCSBDiningCommonsMenuItem/);
+    const button = screen.getByText(/Create Menu Item/);
     expect(button).toHaveAttribute("href", "/UCSBDiningCommonsMenuItem/create");
     expect(button).toHaveAttribute("style", "float: right;");
   });
 
   test("renders three menu items correctly for regular user", async () => {
+    // arrange
     setupUserOnly();
+    const queryClient = new QueryClient();
     axiosMock
       .onGet("/api/UCSBDiningCommonsMenuItem/all")
       .reply(200, ucsbDiningCommonsMenuItemsFixtures.threeMenuItems);
 
+    // act
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -84,6 +87,7 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
       </QueryClientProvider>,
     );
 
+    // assert
     await waitFor(() => {
       expect(
         screen.getByTestId(`${testId}-cell-row-0-col-id`),
@@ -124,12 +128,13 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
   });
 
   test("renders empty table when backend unavailable, user only", async () => {
+    // arrange
     setupUserOnly();
-
+    const queryClient = new QueryClient();
     axiosMock.onGet("/api/UCSBDiningCommonsMenuItem/all").timeout();
-
     const restoreConsole = mockConsole();
 
+    // act
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -138,6 +143,7 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
       </QueryClientProvider>,
     );
 
+    // assert
     await waitFor(() => {
       expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1);
     });
@@ -147,11 +153,16 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
       "Error communicating with backend via GET on /api/UCSBDiningCommonsMenuItem/all",
     );
     restoreConsole();
+
+    expect(
+      screen.queryByTestId(`${testId}-cell-row-0-col-id`),
+    ).not.toBeInTheDocument();
   });
 
   test("what happens when you click delete, admin", async () => {
+    // arrange
     setupAdminUser();
-
+    const queryClient = new QueryClient();
     axiosMock
       .onGet("/api/UCSBDiningCommonsMenuItem/all")
       .reply(200, ucsbDiningCommonsMenuItemsFixtures.threeMenuItems);
@@ -159,6 +170,7 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
       .onDelete("/api/UCSBDiningCommonsMenuItem")
       .reply(200, "UCSBDiningCommonsMenuItem with id 1 was deleted");
 
+    // act
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -167,6 +179,7 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
       </QueryClientProvider>,
     );
 
+    // assert
     await waitFor(() => {
       expect(
         screen.getByTestId(`${testId}-cell-row-0-col-id`),
@@ -177,13 +190,15 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
       "1",
     );
 
-    const deleteButton = await screen.findByTestId(
+    const deleteButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Delete-button`,
     );
     expect(deleteButton).toBeInTheDocument();
 
+    // act
     fireEvent.click(deleteButton);
 
+    // assert
     await waitFor(() => {
       expect(mockToast).toBeCalledWith(
         "UCSBDiningCommonsMenuItem with id 1 was deleted",

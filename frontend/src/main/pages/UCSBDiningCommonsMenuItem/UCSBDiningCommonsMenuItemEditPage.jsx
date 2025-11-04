@@ -66,7 +66,7 @@ export default function UCSBDiningCommonsMenuItemEditPage({
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Edit UCSBDiningCommonsMenuItem</h1>
+        <h1>Edit Menu Item</h1>
         {menuItem && (
           <UCSBDiningCommonsMenuItemForm
             submitAction={onSubmit}
