@@ -290,14 +290,13 @@ describe("Additional mutation-killing tests", () => {
   test("uses array response directly without accessing content property", async () => {
     mockCommon(apiCurrentUserFixtures.userOnly);
     const arrayResponse = ucsbOrganizationFixtures.threeOrganizations;
-    axiosMock
-      .onGet("/api/ucsborganizations/all")
-      .reply(200, arrayResponse);
+    axiosMock.onGet("/api/ucsborganizations/all").reply(200, arrayResponse);
 
     renderPage();
     await screen.findByRole("heading", { name: "UCSBOrganization" });
+
     for (const org of ucsbOrganizationFixtures.threeOrganizations) {
-      await screen.findByText(org.orgCode);
+      expect(await screen.findByText(org.orgCode)).toBeInTheDocument();
     }
   });
   test("calls exact /api/ucsborganizations/all endpoint without modifications", async () => {
