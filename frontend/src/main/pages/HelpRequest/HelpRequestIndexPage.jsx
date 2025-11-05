@@ -6,7 +6,7 @@ import HelpRequestTable from "main/components/HelpRequest/HelpRequestTable";
 import { useCurrentUser, hasRole } from "main/utils/useCurrentUser";
 import { Button } from "react-bootstrap";
 
-export default function RestaurantIndexPage() {
+export default function HelpRequestIndexPage() {
   const currentUser = useCurrentUser();
 
   const {

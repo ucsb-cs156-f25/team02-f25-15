@@ -126,11 +126,20 @@ function App() {
             path="/ucsborganization"
             element={<UCSBOrganizationIndexPage />}
           />
-          <Route exact path="/UCSBDiningCommonsMenuItem" element={<UCSBDiningCommonsMenuItemIndexPage />} />
         </>
       )}
       {hasRole(currentUser, "ROLE_ADMIN") && (
         <>
+          <Route
+            exact
+            path="/UCSBDiningCommonsMenuItem/create"
+            element={<UCSBDiningCommonsMenuItemCreatePage />}
+          />
+          <Route
+            exact
+            path="/UCSBDiningCommonsMenuItem/edit/:id"
+            element={<UCSBDiningCommonsMenuItemEditPage />}
+          />
           <Route
             exact
             path="/articles/edit/:id"
