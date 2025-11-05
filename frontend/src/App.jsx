@@ -146,6 +146,11 @@ function App() {
             path="/ucsborganization/create"
             element={<UCSBOrganizationCreatePage />}
           />
+          <Route
+            exact
+            path="/ucsborganization/create"
+            element={<UCSBOrganizationCreatePage />}
+          />
         </>
       )}
       {hasRole(currentUser, "ROLE_USER") && (
