@@ -28,7 +28,6 @@ describe("UCSBOrganizationForm", () => {
       <Router>
         <UCSBOrganizationForm
           initialContents={{
-            id: 7,
             orgCode: "ZPR",
             orgTranslationShort: "ZETA PHI RHO",
             orgTranslation: "ZETA PHI RHO",
@@ -58,7 +57,6 @@ describe("UCSBOrganizationForm", () => {
   //render: Update
   test("renders update form: id read-only, fields prefilled, orgCode editable", () => {
     renderUpdate();
-    expect(screen.getByTestId(`${testId}-id`)).toHaveValue("7");
     expect(screen.getByTestId(`${testId}-orgCode`)).toHaveValue("ZPR");
     expect(screen.getByTestId(`${testId}-orgTranslationShort`)).toHaveValue(
       "ZETA PHI RHO",

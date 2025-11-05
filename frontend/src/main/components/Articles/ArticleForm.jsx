@@ -19,6 +19,11 @@ function ArticleForm({
 
   const testIdPrefix = "ArticleForm";
 
+  // Stryker disable Regex
+  const isodate_regex =
+    /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+  // Stryker restore Regex
+
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
       {initialContents && (
@@ -58,6 +63,7 @@ function ArticleForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="url">URL</Form.Label>
         <Form.Control
+          data-testid={testIdPrefix + "-url"}
           id="url"
           type="text"
           isInvalid={Boolean(errors.url)}
@@ -73,6 +79,7 @@ function ArticleForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="email">Email</Form.Label>
         <Form.Control
+          data-testid={testIdPrefix + "-email"}
           id="email"
           type="text"
           isInvalid={Boolean(errors.email)}
@@ -88,6 +95,7 @@ function ArticleForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="explanation">Explanation</Form.Label>
         <Form.Control
+          data-testid={testIdPrefix + "-explanation"}
           id="explanation"
           type="text"
           isInvalid={Boolean(errors.explanation)}
@@ -100,7 +108,26 @@ function ArticleForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button type="submit">{buttonLabel}</Button>
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="localDateTime">Date (iso format)</Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-localDateTime"}
+          id="localDateTime"
+          type="datetime-local"
+          isInvalid={Boolean(errors.localDateTime)}
+          {...register("localDateTime", {
+            required: true,
+            pattern: isodate_regex,
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.localDateTime && "LocalDateTime is required."}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Button type="submit" data-testid={testIdPrefix + "-submit"}>
+        {buttonLabel}
+      </Button>
       <Button
         variant="Secondary"
         onClick={() => navigate(-1)}
