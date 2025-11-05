@@ -3,23 +3,11 @@ import { useBackend } from "main/utils/useBackend";
 
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 import UCSBDiningCommonsMenuItemTable from "main/components/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemTable";
-import { useCurrentUser, hasRole } from "main/utils/useCurrentUser";
 import { Button } from "react-bootstrap";
+import { useCurrentUser, hasRole } from "main/utils/useCurrentUser";
 
 export default function UCSBDiningCommonsMenuItemIndexPage() {
   const currentUser = useCurrentUser();
-
-  const {
-    data: menuItems,
-    error: _error,
-    status: _status,
-  } = useBackend(
-    // Stryker disable next-line all : don't test internal caching of React Query
-    ["/api/UCSBDiningCommonsMenuItem/all"],
-    { method: "GET", url: "/api/UCSBDiningCommonsMenuItem/all" },
-    // Stryker disable next-line all : don't test default value of empty list
-    [],
-  );
 
   const createButton = () => {
     if (hasRole(currentUser, "ROLE_ADMIN")) {
@@ -29,17 +17,28 @@ export default function UCSBDiningCommonsMenuItemIndexPage() {
           href="/UCSBDiningCommonsMenuItem/create"
           style={{ float: "right" }}
         >
-          Create UCSBDiningCommonsMenuItem
+          Create Menu Item
         </Button>
       );
     }
   };
 
+  const {
+    data: menuItems,
+    error: _error,
+    status: _status,
+  } = useBackend(
+    // Stryker disable next-line all : don't test internal caching of React Query
+    ["/api/UCSBDiningCommonsMenuItem/all"],
+    { method: "GET", url: "/api/UCSBDiningCommonsMenuItem/all" },
+    [],
+  );
+
   return (
     <BasicLayout>
       <div className="pt-2">
         {createButton()}
-        <h1>UCSBDiningCommonsMenuItem</h1>
+        <h1>Menu Items</h1>
         <UCSBDiningCommonsMenuItemTable menuItems={menuItems} currentUser={currentUser} />
       </div>
     </BasicLayout>
