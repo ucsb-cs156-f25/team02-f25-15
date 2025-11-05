@@ -223,7 +223,7 @@ describe("HelpRequestTable tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
     axiosMock
-      .onDelete("/api/helprequest")
+      .onDelete("/api/helprequests")
       .reply(200, { message: "Help Request deleted" });
 
     // act - render the component
