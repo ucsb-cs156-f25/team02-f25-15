@@ -7,11 +7,7 @@ export function onDeleteSuccess(message) {
 
 export function cellToAxiosParamsDelete(cell) {
   return {
-<<<<<<< HEAD
-    url: "/api/helprequest",
-=======
     url: "/api/helprequests",
->>>>>>> origin/jl-menuitemreview-table
     method: "DELETE",
     params: {
       id: cell.row.original.id,

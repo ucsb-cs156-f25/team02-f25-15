@@ -43,13 +43,7 @@ ThreeItemsOrdinaryUser.parameters = {
       return HttpResponse.json(systemInfoFixtures.showingNeither);
     }),
     http.get("/api/UCSBDiningCommonsMenuItem/all", () => {
-<<<<<<< HEAD
       return HttpResponse.json(ucsbDiningCommonsMenuItemsFixtures.threeMenuItems);
-=======
-      return HttpResponse.json(
-        ucsbDiningCommonsMenuItemsFixtures.threeMenuItems,
-      );
->>>>>>> origin/jl-menuitemreview-table
     }),
   ],
 };
@@ -65,13 +59,7 @@ ThreeItemsAdminUser.parameters = {
       return HttpResponse.json(systemInfoFixtures.showingNeither);
     }),
     http.get("/api/UCSBDiningCommonsMenuItem/all", () => {
-<<<<<<< HEAD
       return HttpResponse.json(ucsbDiningCommonsMenuItemsFixtures.threeMenuItems);
-=======
-      return HttpResponse.json(
-        ucsbDiningCommonsMenuItemsFixtures.threeMenuItems,
-      );
->>>>>>> origin/jl-menuitemreview-table
     }),
     http.delete("/api/UCSBDiningCommonsMenuItem", () => {
       return HttpResponse.json({}, { status: 200 });

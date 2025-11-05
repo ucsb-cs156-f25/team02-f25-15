@@ -326,8 +326,4 @@ describe("Additional mutation-killing tests", () => {
       expect(screen.queryByText(org.orgCode)).not.toBeInTheDocument();
     }
   });
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> origin/jl-menuitemreview-table

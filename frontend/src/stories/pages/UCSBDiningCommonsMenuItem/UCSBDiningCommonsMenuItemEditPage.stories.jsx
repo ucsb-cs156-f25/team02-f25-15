@@ -27,18 +27,12 @@ Default.parameters = {
       });
     }),
     http.get("/api/UCSBDiningCommonsMenuItem", () => {
-<<<<<<< HEAD
-      return HttpResponse.json(ucsbDiningCommonsMenuItemsFixtures.threeMenuItems[0], {
-        status: 200,
-      });
-=======
       return HttpResponse.json(
         ucsbDiningCommonsMenuItemsFixtures.threeMenuItems[0],
         {
           status: 200,
         },
       );
->>>>>>> origin/jl-menuitemreview-table
     }),
     http.put("/api/UCSBDiningCommonsMenuItem", () => {
       return HttpResponse.json({}, { status: 200 });

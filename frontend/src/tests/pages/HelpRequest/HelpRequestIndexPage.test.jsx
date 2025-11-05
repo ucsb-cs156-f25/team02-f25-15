@@ -1,27 +1,15 @@
-<<<<<<< HEAD
-import { render, screen } from "@testing-library/react";
-import HelpRequestIndexPage from "main/pages/HelpRequest/HelpRequestIndexPage";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { MemoryRouter } from "react-router";
-=======
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import HelpRequestIndexPage from "main/pages/HelpRequest/HelpRequestIndexPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router";
 import mockConsole from "tests/testutils/mockConsole";
 import { helpRequestFixtures } from "fixtures/helpRequestFixtures";
->>>>>>> origin/jl-menuitemreview-table
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 
-<<<<<<< HEAD
-describe("HelpRequestIndexPage tests", () => {
-  const axiosMock = new AxiosMockAdapter(axios);
-
-=======
 const mockToast = vi.fn();
 vi.mock("react-toastify", async (importOriginal) => {
   const originalModule = await importOriginal();
@@ -36,7 +24,6 @@ describe("HelpRequestIndexPage tests", () => {
 
   const testId = "HelpRequestTable";
 
->>>>>>> origin/jl-menuitemreview-table
   const setupUserOnly = () => {
     axiosMock.reset();
     axiosMock.resetHistory();
@@ -48,15 +35,6 @@ describe("HelpRequestIndexPage tests", () => {
       .reply(200, systemInfoFixtures.showingNeither);
   };
 
-<<<<<<< HEAD
-  const queryClient = new QueryClient();
-  test("Renders expected content", async () => {
-    // arrange
-
-    setupUserOnly();
-
-    // act
-=======
   const setupAdminUser = () => {
     axiosMock.reset();
     axiosMock.resetHistory();
@@ -73,7 +51,6 @@ describe("HelpRequestIndexPage tests", () => {
   test("Renders with Create Button for admin user", async () => {
     setupAdminUser();
     axiosMock.onGet("/api/helprequests/all").reply(200, []);
->>>>>>> origin/jl-menuitemreview-table
 
     render(
       <QueryClientProvider client={queryClient}>
@@ -83,16 +60,6 @@ describe("HelpRequestIndexPage tests", () => {
       </QueryClientProvider>,
     );
 
-<<<<<<< HEAD
-    await screen.findByText("Index page not yet implemented");
-
-    // assert
-    expect(
-      screen.getByText("Index page not yet implemented"),
-    ).toBeInTheDocument();
-    expect(screen.getByText("Create")).toBeInTheDocument();
-    expect(screen.getByText("Edit")).toBeInTheDocument();
-=======
     await waitFor(() => {
       expect(screen.getByText(/Create Help Request/)).toBeInTheDocument();
     });
@@ -224,6 +191,5 @@ describe("HelpRequestIndexPage tests", () => {
     expect(axiosMock.history.delete[0].url).toBe("/api/helprequests");
     expect(axiosMock.history.delete[0].url).toBe("/api/helprequests");
     expect(axiosMock.history.delete[0].params).toEqual({ id: 2 });
->>>>>>> origin/jl-menuitemreview-table
   });
 });

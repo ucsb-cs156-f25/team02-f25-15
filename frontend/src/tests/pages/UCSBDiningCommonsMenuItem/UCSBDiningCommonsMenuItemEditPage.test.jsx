@@ -70,15 +70,11 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
         </QueryClientProvider>,
       );
       await screen.findByText("Edit Menu Item");
-<<<<<<< HEAD
-      expect(screen.queryByTestId("UCSBDiningCommonsMenuItemForm-dining_commons_code")).not.toBeInTheDocument();
-=======
       expect(
         screen.queryByTestId(
           "UCSBDiningCommonsMenuItemForm-dining_commons_code",
         ),
       ).not.toBeInTheDocument();
->>>>>>> origin/jl-menuitemreview-table
       restoreConsole();
     });
   });

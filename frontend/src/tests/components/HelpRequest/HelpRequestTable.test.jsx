@@ -223,11 +223,7 @@ describe("HelpRequestTable tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
     axiosMock
-<<<<<<< HEAD
-      .onDelete("/api/helprequest")
-=======
       .onDelete("/api/helprequests")
->>>>>>> origin/jl-menuitemreview-table
       .reply(200, { message: "Help Request deleted" });
 
     // act - render the component
