@@ -33,7 +33,14 @@ export default function MenuItemReviewsCreatePage({ storybook = false }) {
   const { isSuccess } = mutation;
 
   const onSubmit = async (data) => {
-    mutation.mutate(data);
+    const menuItemReview = {
+      itemId: parseInt(data.itemId),
+      reviewerEmail: data.reviewerEmail,
+      stars: parseInt(data.stars),
+      dateReviewed: data.dateReviewed,
+      comments: data.comments,
+    };
+    mutation.mutate(menuItemReview);
   };
 
   if (isSuccess && !storybook) {
