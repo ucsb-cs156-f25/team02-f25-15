@@ -41,7 +41,11 @@ describe("helpRequestUtils", () => {
 
       // assert
       expect(result).toEqual({
+<<<<<<< HEAD
         url: "/api/helprequest",
+=======
+        url: "/api/helprequests",
+>>>>>>> origin/jl-menuitemreview-table
         method: "DELETE",
         params: { id: 17 },
       });

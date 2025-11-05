@@ -114,10 +114,14 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
 
     // for non-admin users, details button is visible, but the edit and delete buttons should not be visible
     expect(
-      screen.queryByTestId("UCSBDiningCommonsMenuItemTable-cell-row-0-col-Delete-button"),
+      screen.queryByTestId(
+        "UCSBDiningCommonsMenuItemTable-cell-row-0-col-Delete-button",
+      ),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByTestId("UCSBDiningCommonsMenuItemTable-cell-row-0-col-Edit-button"),
+      screen.queryByTestId(
+        "UCSBDiningCommonsMenuItemTable-cell-row-0-col-Edit-button",
+      ),
     ).not.toBeInTheDocument();
   });
 
@@ -194,7 +198,9 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
 
     // assert
     await waitFor(() => {
-      expect(mockToast).toBeCalledWith("UCSBDiningCommonsMenuItem with id 1 was deleted");
+      expect(mockToast).toBeCalledWith(
+        "UCSBDiningCommonsMenuItem with id 1 was deleted",
+      );
     });
   });
 });

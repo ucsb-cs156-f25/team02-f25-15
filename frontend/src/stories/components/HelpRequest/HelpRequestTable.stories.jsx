@@ -35,7 +35,11 @@ ThreeItemsAdminUser.args = {
 
 ThreeItemsAdminUser.parameters = {
   msw: [
+<<<<<<< HEAD
     http.delete("/api/helprequest", () => {
+=======
+    http.delete("/api/helprequests", () => {
+>>>>>>> origin/jl-menuitemreview-table
       return HttpResponse.json(
         { message: "Help Request deleted successfully" },
         { status: 200 },
