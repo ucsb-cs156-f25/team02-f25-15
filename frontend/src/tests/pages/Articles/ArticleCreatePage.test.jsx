@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import UCSBDiningCommonsMenuItemCreatePage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemCreatePage";
+import ArticleCreatePage from "main/pages/Articles/ArticleCreatePage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router";
 
@@ -30,7 +30,7 @@ vi.mock("react-router", async (importOriginal) => {
   };
 });
 
-describe("UCSBDiningCommonsMenuItemCreatePage tests", () => {
+describe("ArticleCreatePage tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
 
   beforeEach(() => {
@@ -50,70 +50,85 @@ describe("UCSBDiningCommonsMenuItemCreatePage tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBDiningCommonsMenuItemCreatePage />
+          <ArticleCreatePage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
 
     await waitFor(() => {
-      expect(screen.getByLabelText("Dining Commons Code")).toBeInTheDocument();
+      expect(screen.getByLabelText("Title")).toBeInTheDocument();
     });
   });
 
-  test("on submit, makes request to backend, and redirects to /UCSBDiningCommonsMenuItem", async () => {
+  test("on submit, makes request to backend, and redirects to /articles", async () => {
     const queryClient = new QueryClient();
-    const menuItem = {
+    const article = {
       id: 3,
-      dining_commons_code: "ortega",
-      name: "Chicken Sandwich",
-      station: "Grill",
+      title: "South Coast Deli",
+      url: "https://southcoastdeli.com",
+      email: "info@southcoastdeli.com",
+      explanation: "Sandwiches and Salads",
+      localDateTime: "2023-10-30T12:00",
     };
 
-    axiosMock
-      .onPost("/api/UCSBDiningCommonsMenuItem/post")
-      .reply(202, menuItem);
+    axiosMock.onPost("/api/articles/post").reply(202, article);
 
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBDiningCommonsMenuItemCreatePage />
+          <ArticleCreatePage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
 
     await waitFor(() => {
-      expect(screen.getByLabelText("Dining Commons Code")).toBeInTheDocument();
+      expect(screen.getByLabelText("Title")).toBeInTheDocument();
     });
 
-    const diningCommonsCodeInput = screen.getByLabelText("Dining Commons Code");
-    expect(diningCommonsCodeInput).toBeInTheDocument();
+    const titleInput = screen.getByLabelText("Title");
+    expect(titleInput).toBeInTheDocument();
 
-    const nameInput = screen.getByLabelText("Name");
-    expect(nameInput).toBeInTheDocument();
-
-    const stationInput = screen.getByLabelText("Station");
-    expect(stationInput).toBeInTheDocument();
+    const URLInput = screen.getByLabelText("URL");
+    expect(URLInput).toBeInTheDocument();
+    const EmailInput = screen.getByLabelText("Email");
+    expect(EmailInput).toBeInTheDocument();
+    const ExplanationInput = screen.getByLabelText("Explanation");
+    expect(ExplanationInput).toBeInTheDocument();
+    const LocalDateTimeInput = screen.getByLabelText("Date (iso format)");
+    expect(LocalDateTimeInput).toBeInTheDocument();
 
     const createButton = screen.getByText("Create");
     expect(createButton).toBeInTheDocument();
 
-    fireEvent.change(diningCommonsCodeInput, { target: { value: "ortega" } });
-    fireEvent.change(nameInput, { target: { value: "Chicken Sandwich" } });
-    fireEvent.change(stationInput, { target: { value: "Grill" } });
+    fireEvent.change(titleInput, { target: { value: "South Coast Deli" } });
+    fireEvent.change(URLInput, {
+      target: { value: "https://southcoastdeli.com" },
+    });
+    fireEvent.change(EmailInput, {
+      target: { value: "info@southcoastdeli.com" },
+    });
+    fireEvent.change(ExplanationInput, {
+      target: { value: "Sandwiches and Salads" },
+    });
+    fireEvent.change(LocalDateTimeInput, {
+      target: { value: "2023-10-30T12:00" },
+    });
     fireEvent.click(createButton);
 
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 
     expect(axiosMock.history.post[0].params).toEqual({
-      dining_commons_code: "ortega",
-      name: "Chicken Sandwich",
-      station: "Grill",
+      title: "South Coast Deli",
+      url: "https://southcoastdeli.com",
+      email: "info@southcoastdeli.com",
+      explanation: "Sandwiches and Salads",
+      localDateTime: "2023-10-30T12:00",
     });
 
     // assert - check that the toast was called with the expected message
-    expect(mockToast).toBeCalledWith(
-      "New menu item Created - id: 3 name: Chicken Sandwich",
+    expect(mockToast).toHaveBeenCalledWith(
+      "New article Created - id: 3 title: South Coast Deli",
     );
-    expect(mockNavigate).toBeCalledWith({ to: "/UCSBDiningCommonsMenuItem" });
+    expect(mockNavigate).toHaveBeenCalledWith({ to: "/articles" });
   });
 });
