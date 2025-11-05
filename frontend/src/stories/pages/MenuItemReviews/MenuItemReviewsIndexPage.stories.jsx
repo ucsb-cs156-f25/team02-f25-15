@@ -1,17 +1,17 @@
 import React from "react";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-import { ucsbDiningCommonsMenuItemsFixtures } from "fixtures/ucsbDiningCommonsMenuItemFixtures";
+import { menuItemReviewFixtures } from "fixtures/menuItemReviewFixtures";
 import { http, HttpResponse } from "msw";
 
-import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage";
+import MenuItemReviewsIndexPage from "main/pages/MenuItemReviews/MenuItemReviewsIndexPage";
 
 export default {
-  title: "pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage",
-  component: UCSBDiningCommonsMenuItemIndexPage,
+  title: "pages/MenuItemReviews/MenuItemReviewsIndexPage",
+  component: MenuItemReviewsIndexPage,
 };
 
-const Template = () => <UCSBDiningCommonsMenuItemIndexPage storybook={true} />;
+const Template = () => <MenuItemReviewsIndexPage storybook={true} />;
 
 export const Empty = Template.bind({});
 Empty.parameters = {
@@ -26,7 +26,7 @@ Empty.parameters = {
         status: 200,
       });
     }),
-    http.get("/api/UCSBDiningCommonsMenuItem/all", () => {
+    http.get("/api/menuitemreviews/all", () => {
       return HttpResponse.json([], { status: 200 });
     }),
   ],
@@ -42,8 +42,8 @@ ThreeItemsOrdinaryUser.parameters = {
     http.get("/api/systemInfo", () => {
       return HttpResponse.json(systemInfoFixtures.showingNeither);
     }),
-    http.get("/api/UCSBDiningCommonsMenuItem/all", () => {
-      return HttpResponse.json(ucsbDiningCommonsMenuItemsFixtures.threeMenuItems);
+    http.get("/api/menuitemreviews/all", () => {
+      return HttpResponse.json(menuItemReviewFixtures.threeMenuItemReviews);
     }),
   ],
 };
@@ -58,11 +58,14 @@ ThreeItemsAdminUser.parameters = {
     http.get("/api/systemInfo", () => {
       return HttpResponse.json(systemInfoFixtures.showingNeither);
     }),
-    http.get("/api/UCSBDiningCommonsMenuItem/all", () => {
-      return HttpResponse.json(ucsbDiningCommonsMenuItemsFixtures.threeMenuItems);
+    http.get("/api/menuitemreviews/all", () => {
+      return HttpResponse.json(menuItemReviewFixtures.threeMenuItemReviews);
     }),
-    http.delete("/api/UCSBDiningCommonsMenuItem", () => {
-      return HttpResponse.json({}, { status: 200 });
+    http.delete("/api/menuitemreviews", () => {
+      return HttpResponse.json(
+        { message: "Menu item review deleted successfully" },
+        { status: 200 }
+      );
     }),
   ],
 };
