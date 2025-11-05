@@ -146,7 +146,7 @@ describe("UCSBOrganizationTable tests", () => {
     expect(lastMutationArgs).toBeTruthy();
     expect(lastMutationArgs.fn).toBe(cellToAxiosParamsDelete);
     expect(lastMutationArgs.opts?.onSuccess).toBe(onDeleteSuccess);
-    expect(lastMutationArgs.deps).toEqual(["/api/ucsborganization/all"]);
+    expect(lastMutationArgs.deps).toEqual(["/api/ucsborganizations/all"]);
 
     // Click Delete -> mutate(cell)
     const delBtn = await screen.findByTestId(
@@ -185,13 +185,13 @@ describe("UCSBOrganizationTable tests", () => {
     };
     const cfg = cellToAxiosParamsDelete(cell);
     expect(cfg).toEqual({
-      url: "/api/ucsborganization",
+      url: "/api/ucsborganizations",
       method: "DELETE",
       params: { orgCode: cell.row.original.orgCode },
     });
 
     const mock = new AxiosMockAdapter(axios);
-    mock.onDelete("/api/ucsborganization").reply(200, { message: "ok" });
+    mock.onDelete("/api/ucsborganizations").reply(200, { message: "ok" });
     await axios.delete(cfg.url, { params: cfg.params });
     expect(mock.history.delete.length).toBe(1);
     mock.reset();
