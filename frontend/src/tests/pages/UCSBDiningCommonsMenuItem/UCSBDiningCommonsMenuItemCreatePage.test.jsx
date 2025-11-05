@@ -69,9 +69,7 @@ describe("UCSBDiningCommonsMenuItemCreatePage tests", () => {
       station: "Grill",
     };
 
-    axiosMock
-      .onPost("/api/UCSBDiningCommonsMenuItem/post")
-      .reply(202, menuItem);
+    axiosMock.onPost("/api/UCSBDiningCommonsMenuItem/post").reply(202, menuItem);
 
     render(
       <QueryClientProvider client={queryClient}>
