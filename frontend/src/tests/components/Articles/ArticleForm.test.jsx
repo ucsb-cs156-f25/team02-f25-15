@@ -18,7 +18,13 @@ vi.mock("react-router", async () => {
 describe("ArticleForm tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["Title", "URL", "Email", "Explanation"];
+  const expectedHeaders = [
+    "Title",
+    "URL",
+    "Email",
+    "Explanation",
+    "Date (iso format)",
+  ];
   const testId = "ArticleForm";
 
   test("renders correctly with no initialContents", async () => {
@@ -56,13 +62,24 @@ describe("ArticleForm tests", () => {
 
     expect(await screen.findByTestId(`${testId}-id`)).toBeInTheDocument();
     expect(screen.getByText(`Id`)).toBeInTheDocument();
-    expect(screen.getByLabelText(`Id`)).toHaveValue(String(articlesFixtures.oneArticle.id));
-    expect(screen.getByLabelText(`Title`)).toHaveValue(articlesFixtures.oneArticle.title);
-    expect(screen.getByLabelText(`URL`)).toHaveValue(articlesFixtures.oneArticle.url);
-    expect(screen.getByLabelText(`Email`)).toHaveValue(articlesFixtures.oneArticle.email);
-    expect(screen.getByLabelText(`Explanation`)).toHaveValue(articlesFixtures.oneArticle.explanation);
-
-
+    expect(screen.getByLabelText(`Id`)).toHaveValue(
+      String(articlesFixtures.oneArticle.id),
+    );
+    expect(screen.getByLabelText(`Title`)).toHaveValue(
+      articlesFixtures.oneArticle.title,
+    );
+    expect(screen.getByLabelText(`URL`)).toHaveValue(
+      articlesFixtures.oneArticle.url,
+    );
+    expect(screen.getByLabelText(`Email`)).toHaveValue(
+      articlesFixtures.oneArticle.email,
+    );
+    expect(screen.getByLabelText(`Explanation`)).toHaveValue(
+      articlesFixtures.oneArticle.explanation,
+    );
+    expect(screen.getByLabelText(`Date (iso format)`)).toHaveValue(
+      articlesFixtures.oneArticle.localDateTime,
+    );
   });
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
@@ -98,8 +115,13 @@ describe("ArticleForm tests", () => {
     expect(screen.getByText(/URL is required/)).toBeInTheDocument();
     expect(screen.getByText(/Email is required/)).toBeInTheDocument();
     expect(screen.getByText(/Explanation is required/)).toBeInTheDocument();
+    expect(screen.getByText(/LocalDateTime is required/)).toBeInTheDocument();
 
     const titleInput = screen.getByTestId(`${testId}-title`);
+    expect(screen.getByTestId(`${testId}-url`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-email`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-explanation`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-localDateTime`)).toBeInTheDocument();
     fireEvent.change(titleInput, { target: { value: "a".repeat(31) } });
     fireEvent.click(submitButton);
 
