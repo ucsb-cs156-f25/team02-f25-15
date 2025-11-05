@@ -33,7 +33,7 @@ describe("MenuItemReviewForm tests", () => {
         <Router>
           <MenuItemReviewForm />
         </Router>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     expect(await screen.findByText(/Create/)).toBeInTheDocument();
@@ -52,7 +52,7 @@ describe("MenuItemReviewForm tests", () => {
             initialContents={menuItemReviewFixtures.oneMenuItemReview}
           />
         </Router>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     expect(await screen.findByText(/Create/)).toBeInTheDocument();
@@ -72,7 +72,7 @@ describe("MenuItemReviewForm tests", () => {
         <Router>
           <MenuItemReviewForm />
         </Router>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
     expect(await screen.findByTestId(`${testId}-cancel`)).toBeInTheDocument();
     const cancelButton = screen.getByTestId(`${testId}-cancel`);
@@ -88,7 +88,7 @@ describe("MenuItemReviewForm tests", () => {
         <Router>
           <MenuItemReviewForm />
         </Router>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     expect(await screen.findByText(/Create/)).toBeInTheDocument();
@@ -99,7 +99,7 @@ describe("MenuItemReviewForm tests", () => {
     expect(screen.getByText(/Reviewer Email is required/)).toBeInTheDocument();
     expect(screen.getByText(/Stars are required/)).toBeInTheDocument();
     expect(
-      screen.getByText(/Date reviewed \(iso format\) is required/),
+      screen.getByText(/Date reviewed \(iso format\) is required/)
     ).toBeInTheDocument();
     expect(screen.getByText(/Comment is required/)).toBeInTheDocument();
 
@@ -134,7 +134,7 @@ describe("MenuItemReviewForm tests", () => {
             buttonLabel="Update"
           />
         </Router>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     const itemIdInput = screen.getByTestId(`${testId}-itemId`);
@@ -176,7 +176,7 @@ describe("MenuItemReviewForm tests", () => {
         <Router>
           <MenuItemReviewForm submitAction={mockSubmitAction} />
         </Router>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     const itemIdInput = screen.getByTestId(`${testId}-itemId`);
