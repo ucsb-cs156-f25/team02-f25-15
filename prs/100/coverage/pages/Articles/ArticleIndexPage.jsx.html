@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for pages/HelpRequest/HelpRequestIndexPage.jsx</title>
+    <title>Code coverage report for pages/Articles/ArticleIndexPage.jsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">pages/HelpRequest</a> HelpRequestIndexPage.jsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">pages/Articles</a> ArticleIndexPage.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -161,21 +161,21 @@
 import { useBackend } from "main/utils/useBackend";
 &nbsp;
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
-import HelpRequestTable from "main/components/HelpRequest/HelpRequestTable";
+import ArticleTable from "main/components/Articles/ArticleTable";
 import { useCurrentUser, hasRole } from "main/utils/useCurrentUser";
 import { Button } from "react-bootstrap";
 &nbsp;
-export default function HelpRequestIndexPage() {
+export default function ArticleIndexPage() {
   const currentUser = useCurrentUser();
 &nbsp;
   const {
-    data: helprequests,
+    data: articles,
     error: _error,
     status: _status,
   } = useBackend(
     // Stryker disable next-line all : don't test internal caching of React Query
-    ["/api/helprequests/all"],
-    { method: "GET", url: "/api/helprequests/all" },
+    ["/api/articles/all"],
+    { method: "GET", url: "/api/articles/all" },
     // Stryker disable next-line all : don't test default value of empty list
     [],
   );
@@ -185,10 +185,10 @@ export default function HelpRequestIndexPage() {
       return (
         &lt;Button
           variant="primary"
-          href="/helprequests/create"
+          href="/articles/create"
           style={{ float: "right" }}
         &gt;
-          Create Help Request
+          Create Article
         &lt;/Button&gt;
       );
     }
@@ -198,8 +198,8 @@ export default function HelpRequestIndexPage() {
     &lt;BasicLayout&gt;
       &lt;div className="pt-2"&gt;
         {createButton()}
-        &lt;h1&gt;Help Requests&lt;/h1&gt;
-        &lt;HelpRequestTable helprequests={helprequests} currentUser={currentUser} /&gt;
+        &lt;h1&gt;Articles&lt;/h1&gt;
+        &lt;ArticleTable articles={articles} currentUser={currentUser} /&gt;
       &lt;/div&gt;
     &lt;/BasicLayout&gt;
   );
