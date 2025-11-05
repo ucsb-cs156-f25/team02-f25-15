@@ -149,12 +149,12 @@ describe("RecommendationRequestForm tests", () => {
         </Router>
       </QueryClientProvider>,
     );
-  
+
     const requesterEmail = screen.getByTestId(`${testId}-requesterEmail`);
-    
+
     // Use a value that fails the regex but might pass HTML5 validation
     fireEvent.change(requesterEmail, { target: { value: "test@test" } });
-    
+
     // Fill other required fields
     fireEvent.change(screen.getByTestId(`${testId}-professorEmail`), {
       target: { value: "prof@example.com" },
@@ -168,11 +168,13 @@ describe("RecommendationRequestForm tests", () => {
     fireEvent.change(screen.getByTestId(`${testId}-dateNeeded`), {
       target: { value: "2024-02-01T12:00" },
     });
-  
+
     fireEvent.click(screen.getByText(/Create/));
-  
+
     await waitFor(() => {
-      expect(screen.getByText('Email should contain one "@" and one "."')).toBeInTheDocument();
+      expect(
+        screen.getByText('Email should contain one "@" and one "."'),
+      ).toBeInTheDocument();
     });
   });
 
@@ -217,7 +219,9 @@ describe("RecommendationRequestForm tests", () => {
       </QueryClientProvider>,
     );
 
-    const requesterEmail = await screen.findByTestId(`${testId}-requesterEmail`);
+    const requesterEmail = await screen.findByTestId(
+      `${testId}-requesterEmail`,
+    );
     expect(requesterEmail.value).toBe("prefilled@example.com");
   });
 
@@ -232,62 +236,62 @@ describe("RecommendationRequestForm tests", () => {
 
     expect(await screen.findByText(/Update/)).toBeInTheDocument();
   });
-  
+
   test("shows max length validation message for requesterEmail", async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
           <RecommendationRequestForm />
         </Router>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
-  
+
     await screen.findByTestId(`${testId}-requesterEmail`);
     const requesterEmailField = screen.getByTestId(`${testId}-requesterEmail`);
     const submitButton = screen.getByTestId(`${testId}-submit`);
-  
+
     // Create a valid email format that's longer than 255 characters
     const longEmail = "a".repeat(250) + "@b.com"; // 256 characters total
     fireEvent.change(requesterEmailField, { target: { value: longEmail } });
     fireEvent.click(submitButton);
-  
+
     await waitFor(() => {
       expect(screen.getByText("Max length 255 characters")).toBeInTheDocument();
     });
   });
-  
+
   test("shows max length validation message for professorEmail", async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
           <RecommendationRequestForm />
         </Router>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
-  
+
     await screen.findByTestId(`${testId}-professorEmail`);
     const professorEmailField = screen.getByTestId(`${testId}-professorEmail`);
     const submitButton = screen.getByTestId(`${testId}-submit`);
-  
+
     // Create a valid email format that's longer than 255 characters
     const longEmail = "b".repeat(250) + "@c.com"; // 256 characters total
     fireEvent.change(professorEmailField, { target: { value: longEmail } });
     fireEvent.click(submitButton);
-  
+
     await waitFor(() => {
       expect(screen.getByText("Max length 255 characters")).toBeInTheDocument();
     });
   });
-  
+
   test("shows ISO format validation message for dateRequested", async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
           <RecommendationRequestForm />
         </Router>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
-  
+
     await screen.findByTestId(`${testId}-dateRequested`);
     const dateRequestedField = screen.getByTestId(`${testId}-dateRequested`);
     const requesterEmailField = screen.getByTestId(`${testId}-requesterEmail`);
@@ -295,32 +299,40 @@ describe("RecommendationRequestForm tests", () => {
     const explanationField = screen.getByTestId(`${testId}-explanation`);
     const dateNeededField = screen.getByTestId(`${testId}-dateNeeded`);
     const submitButton = screen.getByTestId(`${testId}-submit`);
-  
+
     // Fill in other required fields with valid data
-    fireEvent.change(requesterEmailField, { target: { value: "test@test.com" } });
-    fireEvent.change(professorEmailField, { target: { value: "prof@test.com" } });
-    fireEvent.change(explanationField, { target: { value: "test explanation" } });
-    fireEvent.change(dateNeededField, { target: { value: "2022-01-02T12:00" } });
-    
+    fireEvent.change(requesterEmailField, {
+      target: { value: "test@test.com" },
+    });
+    fireEvent.change(professorEmailField, {
+      target: { value: "prof@test.com" },
+    });
+    fireEvent.change(explanationField, {
+      target: { value: "test explanation" },
+    });
+    fireEvent.change(dateNeededField, {
+      target: { value: "2022-01-02T12:00" },
+    });
+
     // Set invalid date format
     fireEvent.change(dateRequestedField, { target: { value: "invalid" } });
     fireEvent.click(submitButton);
-  
+
     await waitFor(() => {
       // Check if the field has the is-invalid class
       expect(dateRequestedField).toHaveClass("is-invalid");
     });
   });
-  
+
   test("shows ISO format validation message for dateNeeded", async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
           <RecommendationRequestForm />
         </Router>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
-  
+
     await screen.findByTestId(`${testId}-dateNeeded`);
     const dateNeededField = screen.getByTestId(`${testId}-dateNeeded`);
     const requesterEmailField = screen.getByTestId(`${testId}-requesterEmail`);
@@ -328,17 +340,25 @@ describe("RecommendationRequestForm tests", () => {
     const explanationField = screen.getByTestId(`${testId}-explanation`);
     const dateRequestedField = screen.getByTestId(`${testId}-dateRequested`);
     const submitButton = screen.getByTestId(`${testId}-submit`);
-  
+
     // Fill in other required fields with valid data
-    fireEvent.change(requesterEmailField, { target: { value: "test@test.com" } });
-    fireEvent.change(professorEmailField, { target: { value: "prof@test.com" } });
-    fireEvent.change(explanationField, { target: { value: "test explanation" } });
-    fireEvent.change(dateRequestedField, { target: { value: "2022-01-02T12:00" } });
-    
+    fireEvent.change(requesterEmailField, {
+      target: { value: "test@test.com" },
+    });
+    fireEvent.change(professorEmailField, {
+      target: { value: "prof@test.com" },
+    });
+    fireEvent.change(explanationField, {
+      target: { value: "test explanation" },
+    });
+    fireEvent.change(dateRequestedField, {
+      target: { value: "2022-01-02T12:00" },
+    });
+
     // Set invalid date format
     fireEvent.change(dateNeededField, { target: { value: "invalid" } });
     fireEvent.click(submitButton);
-  
+
     await waitFor(() => {
       // Check if the field has the is-invalid class
       expect(dateNeededField).toHaveClass("is-invalid");
