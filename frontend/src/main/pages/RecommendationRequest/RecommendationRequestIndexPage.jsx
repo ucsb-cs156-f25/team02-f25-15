@@ -1,12 +1,11 @@
 import React from "react";
 import { useBackend } from "main/utils/useBackend";
-
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
-import UCSBDiningCommonsMenuItemTable from "main/components/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemTable";
+import RecommendationRequestTable from "main/components/RecommendationRequest/RecommendationRequestTable";
 import { Button } from "react-bootstrap";
 import { useCurrentUser, hasRole } from "main/utils/useCurrentUser";
 
-export default function UCSBDiningCommonsMenuItemIndexPage() {
+export default function RecommendationRequestIndexPage() {
   const currentUser = useCurrentUser();
 
   const createButton = () => {
@@ -14,23 +13,24 @@ export default function UCSBDiningCommonsMenuItemIndexPage() {
       return (
         <Button
           variant="primary"
-          href="/UCSBDiningCommonsMenuItem/create"
+          href="/recommendationrequest/create"
           style={{ float: "right" }}
         >
-          Create Menu Item
+          Create Recommendation Request
         </Button>
       );
     }
   };
 
   const {
-    data: menuItems,
+    data: recommendationRequests,
     error: _error,
     status: _status,
   } = useBackend(
     // Stryker disable next-line all : don't test internal caching of React Query
-    ["/api/UCSBDiningCommonsMenuItem/all"],
-    { method: "GET", url: "/api/UCSBDiningCommonsMenuItem/all" },
+    ["/api/recommendationrequest/all"],
+    { method: "GET", url: "/api/recommendationrequest/all" },
+     // Stryker disable next-line all : default empty array is not testable
     [],
   );
 
@@ -38,9 +38,9 @@ export default function UCSBDiningCommonsMenuItemIndexPage() {
     <BasicLayout>
       <div className="pt-2">
         {createButton()}
-        <h1>UCSBDiningCommonsMenuItem</h1>
-        <UCSBDiningCommonsMenuItemTable
-          menuItems={menuItems}
+        <h1>Recommendation Requests</h1>
+        <RecommendationRequestTable
+          recommendationRequests={recommendationRequests}
           currentUser={currentUser}
         />
       </div>

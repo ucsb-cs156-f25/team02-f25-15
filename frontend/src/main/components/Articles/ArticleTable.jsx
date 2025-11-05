@@ -5,19 +5,19 @@ import { useBackendMutation } from "main/utils/useBackend";
 import {
   cellToAxiosParamsDelete,
   onDeleteSuccess,
-} from "main/utils/UCSBDiningCommonsMenuItemUtils";
+} from "main/utils/articleUtils";
 import { useNavigate } from "react-router";
 import { hasRole } from "main/utils/useCurrentUser";
 
-export default function UCSBDiningCommonsMenuItemTable({
-  menuItems,
+export default function ArticleTable({
+  articles,
   currentUser,
-  testIdPrefix = "UCSBDiningCommonsMenuItemTable",
+  testIdPrefix = "ArticleTable",
 }) {
   const navigate = useNavigate();
 
   const editCallback = (cell) => {
-    navigate(`/UCSBDiningCommonsMenuItem/edit/${cell.row.original.id}`);
+    navigate(`/articles/edit/${cell.row.original.id}`);
   };
 
   // Stryker disable all : hard to test for query caching
@@ -25,7 +25,7 @@ export default function UCSBDiningCommonsMenuItemTable({
   const deleteMutation = useBackendMutation(
     cellToAxiosParamsDelete,
     { onSuccess: onDeleteSuccess },
-    ["/api/UCSBDiningCommonsMenuItem/all"],
+    ["/api/articles/all"],
   );
   // Stryker restore all
 
@@ -39,17 +39,26 @@ export default function UCSBDiningCommonsMenuItemTable({
       header: "id",
       accessorKey: "id", // accessor is the "key" in the data
     },
+
     {
-      header: "Dining Commons Code",
-      accessorKey: "dining_commons_code",
+      header: "Title",
+      accessorKey: "title",
     },
     {
-      header: "Name",
-      accessorKey: "name",
+      header: "URL",
+      accessorKey: "url",
     },
     {
-      header: "Station",
-      accessorKey: "station",
+      header: "Email",
+      accessorKey: "email",
+    },
+    {
+      header: "Explanation",
+      accessorKey: "explanation",
+    },
+    {
+      header: "LocalDateTime",
+      accessorKey: "localDateTime",
     },
   ];
 
@@ -60,5 +69,5 @@ export default function UCSBDiningCommonsMenuItemTable({
     );
   }
 
-  return <OurTable data={menuItems} columns={columns} testid={testIdPrefix} />;
+  return <OurTable data={articles} columns={columns} testid={testIdPrefix} />;
 }

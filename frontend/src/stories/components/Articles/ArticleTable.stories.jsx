@@ -1,43 +1,43 @@
 import React from "react";
-import UCSBDiningCommonsMenuItemTable from "main/components/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemTable";
-import { ucsbDiningCommonsMenuItemsFixtures } from "fixtures/ucsbDiningCommonsMenuItemFixtures";
+import ArticleTable from "main/components/Articles/ArticleTable";
+import { articlesFixtures } from "fixtures/articlesFixtures";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
 import { http, HttpResponse } from "msw";
 
 export default {
-  title: "components/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemTable",
-  component: UCSBDiningCommonsMenuItemTable,
+  title: "components/Articles/ArticleTable",
+  component: ArticleTable,
 };
 
 const Template = (args) => {
-  return <UCSBDiningCommonsMenuItemTable {...args} />;
+  return <ArticleTable {...args} />;
 };
 
 export const Empty = Template.bind({});
 
 Empty.args = {
-  menuItems: [],
+  articles: [],
   currentUser: currentUserFixtures.userOnly,
 };
 
 export const ThreeItemsOrdinaryUser = Template.bind({});
 
 ThreeItemsOrdinaryUser.args = {
-  menuItems: ucsbDiningCommonsMenuItemsFixtures.threeMenuItems,
+  articles: articlesFixtures.threeArticles,
   currentUser: currentUserFixtures.userOnly,
 };
 
 export const ThreeItemsAdminUser = Template.bind({});
 ThreeItemsAdminUser.args = {
-  menuItems: ucsbDiningCommonsMenuItemsFixtures.threeMenuItems,
+  articles: articlesFixtures.threeArticles,
   currentUser: currentUserFixtures.adminUser,
 };
 
 ThreeItemsAdminUser.parameters = {
   msw: [
-    http.delete("/api/UCSBDiningCommonsMenuItem", () => {
+    http.delete("/api/articles", () => {
       return HttpResponse.json(
-        { message: "UCSBDiningCommonsMenuItem deleted successfully" },
+        { message: "Article deleted successfully" },
         { status: 200 },
       );
     }),
