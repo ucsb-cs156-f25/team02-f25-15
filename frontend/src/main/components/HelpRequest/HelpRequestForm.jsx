@@ -132,16 +132,15 @@ function HelpRequestForm({
 
       <Form.Group className="mb-3">
         <Form.Label htmlFor="solved">Solved</Form.Label>
-        <Form.Control
+        <Form.Check
+          data-testid={`${testIdPrefix}-solved`}
           id="solved"
-          type="boolean"
+          type="checkbox"
           isInvalid={Boolean(errors.solved)}
-          {...register("solved", {
-            required: "solved is required.",
-          })}
+          {...register("solved")}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.solved?.message}
+          {errors.solved}
         </Form.Control.Feedback>
       </Form.Group>
 
