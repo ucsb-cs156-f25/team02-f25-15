@@ -1,17 +1,16 @@
 import React from "react";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-import { ucsbDiningCommonsMenuItemsFixtures } from "fixtures/ucsbDiningCommonsMenuItemFixtures";
+import { recommendationRequestFixtures } from "fixtures/recommendationRequestFixtures";
 import { http, HttpResponse } from "msw";
-
-import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage";
+import RecommendationRequestIndexPage from "main/pages/RecommendationRequest/RecommendationRequestIndexPage";
 
 export default {
-  title: "pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage",
-  component: UCSBDiningCommonsMenuItemIndexPage,
+  title: "pages/RecommendationRequest/RecommendationRequestIndexPage",
+  component: RecommendationRequestIndexPage,
 };
 
-const Template = () => <UCSBDiningCommonsMenuItemIndexPage storybook={true} />;
+const Template = () => <RecommendationRequestIndexPage storybook={true} />;
 
 export const Empty = Template.bind({});
 Empty.parameters = {
@@ -26,14 +25,13 @@ Empty.parameters = {
         status: 200,
       });
     }),
-    http.get("/api/UCSBDiningCommonsMenuItem/all", () => {
+    http.get("/api/recommendationrequest/all", () => {
       return HttpResponse.json([], { status: 200 });
     }),
   ],
 };
 
 export const ThreeItemsOrdinaryUser = Template.bind({});
-
 ThreeItemsOrdinaryUser.parameters = {
   msw: [
     http.get("/api/currentUser", () => {
@@ -42,16 +40,13 @@ ThreeItemsOrdinaryUser.parameters = {
     http.get("/api/systemInfo", () => {
       return HttpResponse.json(systemInfoFixtures.showingNeither);
     }),
-    http.get("/api/UCSBDiningCommonsMenuItem/all", () => {
-      return HttpResponse.json(
-        ucsbDiningCommonsMenuItemsFixtures.threeMenuItems,
-      );
+    http.get("/api/recommendationrequest/all", () => {
+      return HttpResponse.json(recommendationRequestFixtures.threeRequests);
     }),
   ],
 };
 
 export const ThreeItemsAdminUser = Template.bind({});
-
 ThreeItemsAdminUser.parameters = {
   msw: [
     http.get("/api/currentUser", () => {
@@ -60,12 +55,10 @@ ThreeItemsAdminUser.parameters = {
     http.get("/api/systemInfo", () => {
       return HttpResponse.json(systemInfoFixtures.showingNeither);
     }),
-    http.get("/api/UCSBDiningCommonsMenuItem/all", () => {
-      return HttpResponse.json(
-        ucsbDiningCommonsMenuItemsFixtures.threeMenuItems,
-      );
+    http.get("/api/recommendationrequest/all", () => {
+      return HttpResponse.json(recommendationRequestFixtures.threeRequests);
     }),
-    http.delete("/api/UCSBDiningCommonsMenuItem", () => {
+    http.delete("/api/recommendationrequest", () => {
       return HttpResponse.json({}, { status: 200 });
     }),
   ],
