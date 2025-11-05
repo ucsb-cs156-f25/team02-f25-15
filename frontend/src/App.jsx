@@ -90,6 +90,7 @@ function App() {
             path="/UCSBDiningCommonsMenuItem"
             element={<UCSBDiningCommonsMenuItemIndexPage />}
           />
+          <Route
             path="/ucsborganization"
             element={<UCSBOrganizationIndexPage />}
           />
