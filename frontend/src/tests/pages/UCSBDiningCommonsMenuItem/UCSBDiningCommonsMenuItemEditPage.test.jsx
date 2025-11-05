@@ -46,9 +46,7 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock
-        .onGet("/api/UCSBDiningCommonsMenuItem", { params: { id: 17 } })
-        .timeout();
+      axiosMock.onGet("/api/UCSBDiningCommonsMenuItem", { params: { id: 17 } }).timeout();
     });
 
     afterEach(() => {
@@ -69,12 +67,8 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
           </MemoryRouter>
         </QueryClientProvider>,
       );
-      await screen.findByText("Edit UCSBDiningCommonsMenuItem");
-      expect(
-        screen.queryByTestId(
-          "UCSBDiningCommonsMenuItemForm-dining_commons_code",
-        ),
-      ).not.toBeInTheDocument();
+      await screen.findByText("Edit Menu Item");
+      expect(screen.queryByTestId("UCSBDiningCommonsMenuItemForm-dining_commons_code")).not.toBeInTheDocument();
       restoreConsole();
     });
   });
@@ -90,14 +84,12 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock
-        .onGet("/api/UCSBDiningCommonsMenuItem", { params: { id: 17 } })
-        .reply(200, {
-          id: 17,
-          dining_commons_code: "ortega",
-          name: "Chicken Sandwich",
-          station: "Grill",
-        });
+      axiosMock.onGet("/api/UCSBDiningCommonsMenuItem", { params: { id: 17 } }).reply(200, {
+        id: 17,
+        dining_commons_code: "ortega",
+        name: "Chicken Sandwich",
+        station: "Grill",
+      });
       axiosMock.onPut("/api/UCSBDiningCommonsMenuItem").reply(200, {
         id: "17",
         dining_commons_code: "portola",
@@ -127,18 +119,10 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
       await screen.findByTestId("UCSBDiningCommonsMenuItemForm-id");
 
       const idField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-id");
-      const diningCommonsCodeField = screen.getByTestId(
-        "UCSBDiningCommonsMenuItemForm-dining_commons_code",
-      );
-      const nameField = screen.getByTestId(
-        "UCSBDiningCommonsMenuItemForm-name",
-      );
-      const stationField = screen.getByTestId(
-        "UCSBDiningCommonsMenuItemForm-station",
-      );
-      const submitButton = screen.getByTestId(
-        "UCSBDiningCommonsMenuItemForm-submit",
-      );
+      const diningCommonsCodeField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-dining_commons_code");
+      const nameField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-name");
+      const stationField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-station");
+      const submitButton = screen.getByTestId("UCSBDiningCommonsMenuItemForm-submit");
 
       expect(idField).toBeInTheDocument();
       expect(idField).toHaveValue("17");
@@ -192,18 +176,10 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
       await screen.findByTestId("UCSBDiningCommonsMenuItemForm-id");
 
       const idField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-id");
-      const diningCommonsCodeField = screen.getByTestId(
-        "UCSBDiningCommonsMenuItemForm-dining_commons_code",
-      );
-      const nameField = screen.getByTestId(
-        "UCSBDiningCommonsMenuItemForm-name",
-      );
-      const stationField = screen.getByTestId(
-        "UCSBDiningCommonsMenuItemForm-station",
-      );
-      const submitButton = screen.getByTestId(
-        "UCSBDiningCommonsMenuItemForm-submit",
-      );
+      const diningCommonsCodeField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-dining_commons_code");
+      const nameField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-name");
+      const stationField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-station");
+      const submitButton = screen.getByTestId("UCSBDiningCommonsMenuItemForm-submit");
 
       expect(idField).toHaveValue("17");
       expect(diningCommonsCodeField).toHaveValue("ortega");
