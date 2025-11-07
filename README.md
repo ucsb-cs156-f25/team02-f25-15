@@ -7,7 +7,7 @@ Deployments:
 * Prod: <https://team02.dokku-15.cs.ucsb.edu>
 * QA: <https://team02-qa.dokku-15.cs.ucsb.edu>
 
-
+https://team02-timmywin-dev
 | Table                     | Name         |  Github Id   |
 |---------------------------|--------------|--------------|
 | UCSBDiningCommonsMenuItem |  Akul Singh  | AkulS1008    |
