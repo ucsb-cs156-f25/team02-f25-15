@@ -50,7 +50,7 @@ describe("RecommendationRequestTable tests", () => {
             currentUser={currentUserFixtures.adminUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     expectedHeaders.forEach((headerText) => {
@@ -60,7 +60,7 @@ describe("RecommendationRequestTable tests", () => {
 
     expectedFields.forEach((field) => {
       const fieldElement = screen.queryByTestId(
-        `${testId}-cell-row-0-col-${field}`,
+        `${testId}-cell-row-0-col-${field}`
       );
       expect(fieldElement).not.toBeInTheDocument();
     });
@@ -75,7 +75,7 @@ describe("RecommendationRequestTable tests", () => {
             currentUser={currentUserFixtures.adminUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     expectedHeaders.forEach((headerText) => {
@@ -89,20 +89,20 @@ describe("RecommendationRequestTable tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
-      "1",
+      "1"
     );
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
+      screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`)
     ).toHaveTextContent("student1@ucsb.edu");
 
     const editButton = screen.getByTestId(
-      `${testId}-cell-row-0-col-Edit-button`,
+      `${testId}-cell-row-0-col-Edit-button`
     );
     expect(editButton).toBeInTheDocument();
     expect(editButton).toHaveClass("btn-primary");
 
     const deleteButton = screen.getByTestId(
-      `${testId}-cell-row-0-col-Delete-button`,
+      `${testId}-cell-row-0-col-Delete-button`
     );
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
@@ -117,7 +117,7 @@ describe("RecommendationRequestTable tests", () => {
             currentUser={currentUserFixtures.userOnly}
           />
         </MemoryRouter>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     expectedHeaders.forEach((headerText) => {
@@ -131,10 +131,10 @@ describe("RecommendationRequestTable tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
-      "1",
+      "1"
     );
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
+      screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`)
     ).toHaveTextContent("student1@ucsb.edu");
 
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
@@ -150,11 +150,11 @@ describe("RecommendationRequestTable tests", () => {
             currentUser={currentUserFixtures.adminUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     const editButton = screen.getByTestId(
-      `${testId}-cell-row-0-col-Edit-button`,
+      `${testId}-cell-row-0-col-Edit-button`
     );
     expect(editButton).toBeInTheDocument();
 
@@ -162,8 +162,8 @@ describe("RecommendationRequestTable tests", () => {
 
     await waitFor(() =>
       expect(mockedNavigate).toHaveBeenCalledWith(
-        "/recommendationrequests/edit/1",
-      ),
+        "/recommendationrequest/edit/1"
+      )
     );
   });
 
@@ -176,11 +176,11 @@ describe("RecommendationRequestTable tests", () => {
             currentUser={currentUserFixtures.adminUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     const deleteButton = screen.getByTestId(
-      `${testId}-cell-row-0-col-Delete-button`,
+      `${testId}-cell-row-0-col-Delete-button`
     );
     expect(deleteButton).toBeInTheDocument();
 

@@ -7,7 +7,6 @@ import {
 } from "main/utils/RecommendationRequestUtils";
 import { useNavigate } from "react-router";
 import { hasRole } from "main/utils/useCurrentUser";
-import RecommendationRequestForm from "main/components/RecommendationRequest/RecommendationRequestForm";
 
 export default function RecommendationRequestTable({
   recommendationRequests,
@@ -16,14 +15,14 @@ export default function RecommendationRequestTable({
   const navigate = useNavigate();
 
   const editCallback = (cell) => {
-    navigate(`/recommendationrequests/edit/${cell.row.original.id}`);
+    navigate(`/recommendationrequest/edit/${cell.row.original.id}`);
   };
 
   // Stryker disable all : hard to test for query caching
   const deleteMutation = useBackendMutation(
     cellToAxiosParamsDelete,
     { onSuccess: onDeleteSuccess },
-    ["/api/recommendationrequests/all"],
+    ["/api/recommendationrequest/all"]
   );
   // Stryker restore all
 
@@ -35,7 +34,7 @@ export default function RecommendationRequestTable({
   const columns = [
     {
       header: "id",
-      accessorKey: "id", // accessor is the "key" in the data
+      accessorKey: "id",
     },
     {
       header: "Requester Email",
@@ -65,20 +64,10 @@ export default function RecommendationRequestTable({
 
   if (hasRole(currentUser, "ROLE_ADMIN")) {
     columns.push(
-      ButtonColumn(
-        "Edit",
-        "primary",
-        editCallback,
-        "RecommendationRequestTable",
-      ),
+      ButtonColumn("Edit", "primary", editCallback, "RecommendationRequestTable")
     );
     columns.push(
-      ButtonColumn(
-        "Delete",
-        "danger",
-        deleteCallback,
-        "RecommendationRequestTable",
-      ),
+      ButtonColumn("Delete", "danger", deleteCallback, "RecommendationRequestTable")
     );
   }
 
